@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoryProject", "MemoryProject\MemoryProject.csproj", "{B11F8B35-A823-4E86-867A-A1605837B909}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoryProjectTest", "MemoryProjectTest\MemoryProjectTest.csproj", "{64D33EA0-6D09-438E-9A05-37BFAAD67AC6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B11F8B35-A823-4E86-867A-A1605837B909}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B11F8B35-A823-4E86-867A-A1605837B909}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B11F8B35-A823-4E86-867A-A1605837B909}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B11F8B35-A823-4E86-867A-A1605837B909}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64D33EA0-6D09-438E-9A05-37BFAAD67AC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64D33EA0-6D09-438E-9A05-37BFAAD67AC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64D33EA0-6D09-438E-9A05-37BFAAD67AC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64D33EA0-6D09-438E-9A05-37BFAAD67AC6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
