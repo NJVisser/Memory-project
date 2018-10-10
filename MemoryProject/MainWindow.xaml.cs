@@ -13,7 +13,6 @@
         {
             InitializeComponent();
             grid = new GridSummoner(GameGrid, colCount, rowCount);
-
         }
     }
 }
