@@ -51,7 +51,7 @@ namespace MemoryProject
                     Image backgroundImage = new Image();
                     backgroundImage.Source = new BitmapImage(new Uri("Images/Placeholders/100x100.png", UriKind.Relative));
                     Grid.SetColumn(backgroundImage, column);
-                    Grid.SetRow(backgroundImage, column);
+                    Grid.SetRow(backgroundImage, row);
                     grid.Children.Add(backgroundImage);
                 }
             }

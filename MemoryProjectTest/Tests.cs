@@ -17,7 +17,7 @@ namespace MemoryProjectTest
             var directoryName = TestContext.CurrentContext.TestDirectory;
             var markpadLocation = Path.Combine(directoryName, @"MemoryProject.exe");
             Application = Application.Launch(markpadLocation);
-            var window = Application.GetWindow("MainWindow", InitializeOption.NoCache);
+            var window = Application.GetWindow("Name The Game", InitializeOption.NoCache);
             var button = window.Get<Button>("TestButton");
             button.Click();
         }
