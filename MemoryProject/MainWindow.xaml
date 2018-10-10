@@ -7,10 +7,8 @@
         mc:Ignorable="d"
         Title="Name The Game" Height="450" Width="800">
     <Grid>
-        <Button AutomationProperties.AutomationId="TestButton" Content="Button" HorizontalAlignment="Left" Margin="60,10,0,0" VerticalAlignment="Top" Width="50" Height="26"/>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="133"/>
-        <Grid x:Name="GameGrid" Margin="0,41,0,0">
-
-        </Grid>
+		<Button AutomationProperties.AutomationId="NewGameButton" Content="New game" HorizontalAlignment="Left"
+                Margin="10,10,0,0" VerticalAlignment="Top" Width="80" Height="26"  Click="MainWindow_NewGame"/>
+		<Grid x:Name="GameGrid" Margin="50" />
     </Grid>
 </Window>
