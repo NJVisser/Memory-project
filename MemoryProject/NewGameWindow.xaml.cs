@@ -4,21 +4,22 @@ namespace MemoryProject
 {
     public partial class NewGameWindow : Window
     {
-        public NewGameWindow()
+        private readonly MainWindow _mainWindow;
+
+        public NewGameWindow(MainWindow mainWindow)
         {
+            _mainWindow = mainWindow;
             InitializeComponent();
         }
-
         private void ColCount_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            MainWindow.ColCount = (int) e.NewValue;
+            _mainWindow.SetColCount((int) e.NewValue);
         }
 
         private void RowCount_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            MainWindow.RowCount = (int) e.NewValue;
+            _mainWindow.SetRowCount((int) e.NewValue);
         }
-        
         private void CloseWindow(object sender, RoutedEventArgs e)
         {
             Close();
