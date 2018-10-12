@@ -9,10 +9,12 @@ namespace MemoryProject
     {
         private int _colCount = 4;
         private int _rowCount = 4;
+        private readonly GridManager _gridManager;
 
         public MainWindow()
         {
             InitializeComponent();
+            _gridManager = new GridManager(GameGrid);
         }
 
         public void SetRowCount(int value)
@@ -22,7 +24,7 @@ namespace MemoryProject
 
         public void SetColCount(int value)
         {
-             _colCount = value;
+            _colCount = value;
         }
 
         private void MainWindow_NewGame(object sender, RoutedEventArgs re)
@@ -31,16 +33,9 @@ namespace MemoryProject
             w.Show();
             w.Closing += (s, e) =>
             {
-                Clear();
-                var unused = new GridSummoner(GameGrid, _rowCount, _colCount);
+                _gridManager.Clear();
+                _gridManager.InitializeGameGrid(_colCount, _rowCount);
             };
-        }
-
-        private void Clear()
-        {
-            GameGrid.Children.Clear();
-            GameGrid.RowDefinitions.Clear();
-            GameGrid.ColumnDefinitions.Clear();
         }
     }
 }
