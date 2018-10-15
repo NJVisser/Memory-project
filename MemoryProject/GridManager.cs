@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media.Imaging;
+using System.Windows.Input;
 
 namespace MemoryProject
 {
@@ -29,12 +30,20 @@ namespace MemoryProject
                     {
                         Source = new BitmapImage(new Uri("Images/Placeholders/100x100.png", UriKind.Relative))
                     };
+
+                    backgroundImage.MouseDown += new MouseButtonEventHandler(ClickCard);
                     Grid.SetColumn(backgroundImage, column);
                     Grid.SetRow(backgroundImage, row);
                     _grid.Children.Add(backgroundImage);
 				}
 			}
         }
+        
+        private void ClickCard(object sender, MouseButtonEventArgs e)
+        {
+            ((Image)sender).Source = new BitmapImage(new Uri("Images/Placeholders/CSharp.jpg", UriKind.Relative));
+        }
+        
 
         /// <summary>
         ///     Clears the game gird 
