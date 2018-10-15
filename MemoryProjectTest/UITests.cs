@@ -11,27 +11,44 @@ namespace MemoryProjectTest
     [NonParallelizable]
     public class UITests
     {
+        private Application application;
+        private string markpadLocation;
+
         [Test]
         public void UITest()
         {
-            #region StartUp
-            var directoryName = TestContext.CurrentContext.TestDirectory;
-            var markpadLocation = Path.Combine(directoryName, @"MemoryProject.exe");
-            var application = Application.Launch(markpadLocation);
-            var mainWindow = application.GetWindow("Name The Game", InitializeOption.NoCache);
-            #endregion
+            StartUp();
+            NewGame();
+            Close();
+        }
 
-            #region NewGame
-            var NGbutton = mainWindow.Get<Button>("NewGameButton");
+        void StartUp()
+        {
+            var directoryName = TestContext.CurrentContext.TestDirectory;
+            markpadLocation = Path.Combine(directoryName, @"MemoryProject.exe");
+            application = Application.Launch(markpadLocation);
+            var StartUpMainWindow = application.GetWindow("Name The Game Main Menu", InitializeOption.NoCache);
+            StartUpMainWindow.Get<Button>("Settings").Click();
+        }
+
+        void NewGame()
+        {
+            var mainWindow = application.GetWindow("Name The Game Main Menu", InitializeOption.NoCache);
+            var NGbutton = mainWindow.Get<Button>("NewGame");
             NGbutton.Click();
             var newGameWindow = application.GetWindow("New Game", InitializeOption.NoCache);
             var NewGameGridButton = newGameWindow.Get<Button>("7X7Button");
             NewGameGridButton.Click();
-            #endregion
-          
-            #region Close
-            mainWindow.Close();
-            #endregion
+            var mainGameWindow = application.GetWindow("Name The Game", InitializeOption.NoCache);
+            mainGameWindow.Close();
+        }
+
+        void Close()
+        {
+            var CloseApplication = Application.Launch(markpadLocation);
+            var CloseMainWindow = CloseApplication.GetWindow("Name The Game Main Menu", InitializeOption.NoCache);
+            var CloseNGbutton = CloseMainWindow.Get<Button>("Exit");
+            CloseNGbutton.Click();
         }
     }
 }

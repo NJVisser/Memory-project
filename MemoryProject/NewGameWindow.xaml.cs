@@ -5,17 +5,17 @@ namespace MemoryProject
 {
     public partial class NewGameWindow : Window
     {
-        private readonly MainWindow _mainWindow;
+        private readonly MainGameWindow _mainGameWindow;
 
-        public NewGameWindow(MainWindow mainWindow)
+        public NewGameWindow(MainGameWindow mainGameWindow)
         {
-            _mainWindow = mainWindow;
+            _mainGameWindow = mainGameWindow;
             InitializeComponent();
         }
         
         private void OnButtonClick(object sender, RoutedEventArgs e)
         {
-            _mainWindow.NewGrid(int.Parse(((Button)sender).Tag.ToString()));
+            _mainGameWindow.NewGrid(int.Parse(((Button)sender).Tag.ToString()));
             Close();
         }
     }

@@ -1,0 +1,19 @@
+<Window x:Class="MemoryProject.MainMenuWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:MemoryProject"
+        mc:Ignorable="d"
+        Title="Name The Game Main Menu" Height="450" Width="625">
+	<Grid>
+		<Button Content="New Game" HorizontalAlignment="Left" Margin="30,250,0,0" VerticalAlignment="Top" Width="100" Height="30" 
+		        Click="NewGame" AutomationProperties.AutomationId="NewGame" />
+		<Button Content="Settings" HorizontalAlignment="Left" Margin="30,300,0,0" VerticalAlignment="Top" Width="100" Height="30" 
+		        Click="Settings" AutomationProperties.AutomationId="Settings" />
+		<Button Content="Exit" HorizontalAlignment="Left" Margin="30,350,0,0" VerticalAlignment="Top" Width="100" Height="30" 
+		        Click="Exit" AutomationProperties.AutomationId="Exit" />
+		<ListBox HorizontalAlignment="Left" Height="359" Margin="179,25,0,0" VerticalAlignment="Top" Width="400"/>
+
+	</Grid>
+</Window>

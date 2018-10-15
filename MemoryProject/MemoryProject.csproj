@@ -50,7 +50,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
+    <Page Include="MainMenuWindow.xaml" />
+    <Page Include="MainGameWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -59,8 +60,11 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="GridManager.cs" />
+    <Compile Include="MainMenu.xaml.cs">
+      <DependentUpon>MainMenuWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <DependentUpon>MainGameWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="NewGameWindow.xaml" />
