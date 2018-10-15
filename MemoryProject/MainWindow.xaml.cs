@@ -7,8 +7,6 @@ namespace MemoryProject
     /// </summary>
     public partial class MainWindow
     {
-        private int _colCount = 4;
-        private int _rowCount = 4;
         private readonly GridManager _gridManager;
 
         public MainWindow()
@@ -17,25 +15,16 @@ namespace MemoryProject
             _gridManager = new GridManager(GameGrid);
         }
 
-        public void SetRowCount(int value)
+        public void NewGrid(int size)
         {
-            _rowCount = value;
-        }
-
-        public void SetColCount(int value)
-        {
-            _colCount = value;
+            _gridManager.Clear();
+            _gridManager.InitializeGameGrid(size, size);
         }
 
         private void MainWindow_NewGame(object sender, RoutedEventArgs re)
         {
             var w = new NewGameWindow(this);
             w.Show();
-            w.Closing += (s, e) =>
-            {
-                _gridManager.Clear();
-                _gridManager.InitializeGameGrid(_colCount, _rowCount);
-            };
         }
     }
 }

@@ -25,12 +25,8 @@ namespace MemoryProjectTest
             var NGbutton = mainWindow.Get<Button>("NewGameButton");
             NGbutton.Click();
             var newGameWindow = application.GetWindow("New Game", InitializeOption.NoCache);
-            var rowSlider = newGameWindow.Get<Slider>("RowSlider");
-            var colSlider = newGameWindow.Get<Slider>("ColSlider");
-            rowSlider.SetValue(10);
-            colSlider.SetValue(10);
-            var OKbutton = newGameWindow.Get<Button>("OKButton");
-            OKbutton.Click();
+            var NewGameGridButton = newGameWindow.Get<Button>("7X7Button");
+            NewGameGridButton.Click();
             #endregion
           
             #region Close

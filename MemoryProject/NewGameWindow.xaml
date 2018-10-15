@@ -5,28 +5,23 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:MemoryProject"
         mc:Ignorable="d"
-        Title="New Game" Height="250" Width="350">
+        Title="New Game" Height="250" Width="250">
     <StackPanel Margin="10" VerticalAlignment="Center">
-        <DockPanel VerticalAlignment="Center" Margin="10">
-            <Label DockPanel.Dock="Left" FontWeight="Bold">Rows</Label>
-            <TextBox Text="{Binding ElementName=RowCount, Path=Value, UpdateSourceTrigger=PropertyChanged}"
-                     DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
-            <Slider AutomationProperties.AutomationId="RowSlider" Minimum="2" Maximum="16" TickPlacement="BottomRight"
-                    TickFrequency="1" IsSnapToTickEnabled="True" Name="RowCount" ValueChanged="RowCount_ValueChanged" />
-        </DockPanel>
+		<DockPanel VerticalAlignment="Center" Margin="10">
+			<Button AutomationProperties.AutomationId="4X4Button" Content="4X4" Tag="4" HorizontalAlignment="Left"
+                    Margin="10" VerticalAlignment="Top" Width="75" Height="75"  Click="OnButtonClick" />
+			<Button AutomationProperties.AutomationId="5X5Button" Content="5X5" Tag="5" HorizontalAlignment="Right"
+                    Margin="10" VerticalAlignment="Top" Width="75" Height="75" Click="OnButtonClick" />
+			
+		</DockPanel>
 
-        <DockPanel VerticalAlignment="Center" Margin="10">
-            <Label DockPanel.Dock="Left" FontWeight="Bold">Columns</Label>
-            <TextBox Text="{Binding ElementName=ColCount, Path=Value, UpdateSourceTrigger=PropertyChanged}"
-                     DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
-            <Slider AutomationProperties.AutomationId="ColSlider" Minimum="2" Maximum="16" TickPlacement="BottomRight"
-                    TickFrequency="1" IsSnapToTickEnabled="True" Name="ColCount" ValueChanged="ColCount_ValueChanged" />
-        </DockPanel>
 
-        <DockPanel VerticalAlignment="Center" Margin="10">
-            <Button AutomationProperties.AutomationId="OKButton" Content="OK" HorizontalAlignment="Left"
-                    Margin="60,10,0,0" VerticalAlignment="Top" Width="50" Height="26" Click="CloseWindow" />
-        </DockPanel>
+		<DockPanel VerticalAlignment="Center" Margin="10">
+			<Button AutomationProperties.AutomationId="6X6Button" Content="6X6" Tag="6" HorizontalAlignment="Left"
+                    Margin="10" VerticalAlignment="Top" Width="75" Height="75" Click="OnButtonClick" />
+			<Button AutomationProperties.AutomationId="7X7Button" Content="7X7" Tag="7" HorizontalAlignment="Right"
+                    Margin="10" VerticalAlignment="Top" Width="75" Height="75" Click="OnButtonClick" />
+		</DockPanel>
 
-    </StackPanel>
+	</StackPanel>
 </Window>

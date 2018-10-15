@@ -1,4 +1,5 @@
 using System.Windows;
+using System.Windows.Controls;
 
 namespace MemoryProject
 {
@@ -11,17 +12,10 @@ namespace MemoryProject
             _mainWindow = mainWindow;
             InitializeComponent();
         }
-        private void ColCount_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        
+        private void OnButtonClick(object sender, RoutedEventArgs e)
         {
-            _mainWindow.SetColCount((int) e.NewValue);
-        }
-
-        private void RowCount_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            _mainWindow.SetRowCount((int) e.NewValue);
-        }
-        private void CloseWindow(object sender, RoutedEventArgs e)
-        {
+            _mainWindow.NewGrid(int.Parse(((Button)sender).Tag.ToString()));
             Close();
         }
     }
