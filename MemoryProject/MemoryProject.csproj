@@ -59,6 +59,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Data.cs" />
+    <Compile Include="GridFactory.cs" />
     <Compile Include="GridManager.cs" />
     <Compile Include="MainMenu.xaml.cs">
       <DependentUpon>MainMenuWindow.xaml</DependentUpon>
@@ -94,6 +96,19 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Placeholders\CSharp.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Placeholders\blue.png" />
+    <Resource Include="Images\Placeholders\brown.png" />
+    <Resource Include="Images\Placeholders\green.png" />
+    <Resource Include="Images\Placeholders\orange.png" />
+    <Resource Include="Images\Placeholders\pink.png" />
+    <Resource Include="Images\Placeholders\purple.png" />
+    <Resource Include="Images\Placeholders\red.png" />
+    <Resource Include="Images\Placeholders\yellow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Placeholders\Cardback.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

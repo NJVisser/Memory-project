@@ -6,6 +6,6 @@
         mc:Ignorable="d"
         Title="Name The Game" Height="450" Width="800">
     <Grid>
-		<UniformGrid x:Name="GameGrid" Margin="50"/>
+		<UniformGrid x:Name="LiveGameGrid" Margin="50"/>
     </Grid>
 </Window>

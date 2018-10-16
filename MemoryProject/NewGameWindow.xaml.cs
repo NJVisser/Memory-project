@@ -15,7 +15,8 @@ namespace MemoryProject
         
         private void OnButtonClick(object sender, RoutedEventArgs e)
         {
-            _mainGameWindow.NewGrid(int.Parse(((Button)sender).Tag.ToString()));
+			var size = int.Parse(((Button)sender).Tag.ToString());
+			_mainGameWindow._gridManager.NewGrid(size);
             Close();
         }
     }

@@ -23,7 +23,7 @@ namespace MemoryProjectTest
             var NGbutton = mainWindow.Get<Button>("NewGame");
             NGbutton.Click();
             var newGameWindow = application.GetWindow("New Game", InitializeOption.NoCache);
-            var NewGameGridButton = newGameWindow.Get<Button>("7X7Button");
+            var NewGameGridButton = newGameWindow.Get<Button>("4X4Button");
             NewGameGridButton.Click();
            return application.GetWindow("Name The Game");
         } 
@@ -60,9 +60,9 @@ namespace MemoryProjectTest
         {
             var mainGameWindow = CreateMainGameWindow();
             
-            for (var row = 0; row < 7; row++)
+            for (var row = 0; row < 4; row++)
             {
-                for (var column = 0; column < 7; column++)
+                for (var column = 0; column < 4; column++)
                 {
                     mainGameWindow.Get<Image>($"I{row}X{column}").Click();
                 }

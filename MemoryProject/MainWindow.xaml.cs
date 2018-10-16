@@ -1,4 +1,4 @@
-﻿using System.Windows;
+﻿using MemoryProject.Data;
 
 namespace MemoryProject
 {
@@ -7,18 +7,12 @@ namespace MemoryProject
     /// </summary>
     public partial class MainGameWindow
     {
-        private readonly GridManager _gridManager;
+        public readonly GridManager _gridManager;
 
         public MainGameWindow()
         {
             InitializeComponent();
-            _gridManager = new GridManager(GameGrid);
-        }
-
-        public void NewGrid(int size)
-        {
-            _gridManager.Clear();
-            _gridManager.InitializeGameGrid(size, size);
+            _gridManager = new GridManager(LiveGameGrid);
         }
     }
 }
