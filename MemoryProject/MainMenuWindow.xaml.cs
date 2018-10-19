@@ -13,8 +13,7 @@ namespace MemoryProject
 	    {
 		    var mainWindow = new MainGameWindow();
 		    mainWindow.Show();
-		    var w = new NewGameWindow(mainWindow);
-		    w.Show();
+			new NewGameWindow().Show();
 		    Close();
 	    }
 

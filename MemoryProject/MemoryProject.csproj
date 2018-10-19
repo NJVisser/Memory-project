@@ -62,10 +62,10 @@
     <Compile Include="Data.cs" />
     <Compile Include="GridFactory.cs" />
     <Compile Include="GridManager.cs" />
-    <Compile Include="MainMenu.xaml.cs">
+    <Compile Include="MainMenuWindow.xaml.cs">
       <DependentUpon>MainMenuWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="MainGameWindow.xaml.cs">
       <DependentUpon>MainGameWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>

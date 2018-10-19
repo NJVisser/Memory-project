@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace MemoryProject
 {
-	class GridFactory
+	public sealed class GridFactory
 	{
 
 		static Random rnd = new Random();
@@ -60,7 +60,7 @@ namespace MemoryProject
         /// </summary>
         /// <param name="cols">Amount of columns</param>
         /// <param name="rows">Amount of rows</param>
-        internal static GameGrid InitializeGameGrid(GridManager manager, UniformGrid grid, int cols, int rows)
+        internal GameGrid InitializeGameGrid(int cols, int rows)
         {
 			var TmpCardsList = new List<Card>();
 			TmpCardsList.AddRange(placeholderTheme.cards);
@@ -82,10 +82,10 @@ namespace MemoryProject
                         Source = new BitmapImage(new Uri($"Images/Placeholders/{placeholderTheme.BackImageName}.png", UriKind.Relative))
                     };
                     backgroundImage.Name = $"I{row}X{column}";
-                    backgroundImage.MouseDown += manager.ClickCard;
+                    backgroundImage.MouseDown += GridManager.Instance.ClickCard;
 					Grid.SetColumn(backgroundImage, column);
                     Grid.SetRow(backgroundImage, row);
-					grid.Children.Add(backgroundImage);
+	                GridManager.Instance.LiveGameGrid.Children.Add(backgroundImage);
 
 					RCard.Row = row;
 					RCard.Column = column;
@@ -94,6 +94,17 @@ namespace MemoryProject
 				}
             }
 			return gameGrid;
+		}
+		
+		
+		
+		private static readonly Lazy<GridFactory> LazyGridFactory =
+			new Lazy<GridFactory>(() => new GridFactory());
+    
+		public static GridFactory Instance => LazyGridFactory.Value;
+
+		private GridFactory()
+		{
 		}
     }
 }

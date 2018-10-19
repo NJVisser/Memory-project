@@ -12,15 +12,12 @@ namespace MemoryProject
         private UniformGrid _uniformGrid;
         private GameGrid _gameGrid;
 
-        public GridManager(UniformGrid gameGrid)
-        {
-			_uniformGrid = gameGrid;
-        }
+	    
 
         public void NewGrid(int size)
 		{
 			Clear();
-			_gameGrid = GridFactory.InitializeGameGrid(this, _uniformGrid, size, size);
+			_gameGrid = GridFactory.Instance.InitializeGameGrid(size, size);
         }
 
 		/// <summary>
@@ -32,9 +29,9 @@ namespace MemoryProject
         {
 			//((Image) sender).Source = new BitmapImage(new Uri("Images/Placeholders/CSharp.jpg", UriKind.Relative));
 
-			var Card = ((Image)sender);
-			var x = _gameGrid.cards[Card.Name];
-			Card.Source = new BitmapImage(new Uri($"Images/Placeholders/{x.Name}.png", UriKind.Relative));
+			var card = ((Image)sender);
+			var x = _gameGrid.cards[card.Name];
+			card.Source = new BitmapImage(new Uri($"Images/Placeholders/{x.Name}.png", UriKind.Relative));
 
 		}
 
@@ -43,8 +40,23 @@ namespace MemoryProject
         /// </summary>
         internal void Clear()
         {
-            if(_uniformGrid != null)
-				_uniformGrid.Children.Clear();
+	        _uniformGrid?.Children.Clear();
         }
+	    
+	    
+	    public UniformGrid LiveGameGrid
+	    {
+		    get => _uniformGrid;
+		    set => _uniformGrid = value;
+	    }
+	    
+	    private static readonly Lazy<GridManager> LazyGridManager =
+		    new Lazy<GridManager>(() => new GridManager());
+    
+	    public static GridManager Instance => LazyGridManager.Value;
+
+	    private GridManager()
+	    {
+	    }
     }
 }

@@ -7,12 +7,11 @@ namespace MemoryProject
     /// </summary>
     public partial class MainGameWindow
     {
-        public readonly GridManager _gridManager;
 
         public MainGameWindow()
         {
             InitializeComponent();
-            _gridManager = new GridManager(LiveGameGrid);
+            GridManager.Instance.LiveGameGrid = LiveGameGrid;
         }
     }
 }
