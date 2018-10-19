@@ -3,23 +3,23 @@ using System.Windows.Controls.Primitives;
 
 namespace MemoryProject.Data
 {
-	public class Card
+	public struct Card
 	{
-		public int Column = 0;
-		public int Row = 0;
-		public string Name = "";
-		public bool IsClicked = false;
-		public bool IsGone = false;
+		public int Column;
+		public int Row;
+		public string Name;
+		public bool IsClicked;
+		public bool IsGone;
 	}
 
-	public class GameGrid
+	public struct GameGrid
 	{
-		public Dictionary<string,Card> cards = new Dictionary<string, Card>();
+		public Dictionary<string,Card> cards;
 	}
 
-	public class Theme
+	public struct Theme
 	{
-		public List<Card> cards = new List<Card>();
-		public string BackImageName = "";
+		public List<Card> cards;
+		public string BackImageName;
 	}
 }

@@ -17,7 +17,7 @@ namespace MemoryProject
 		/// </summary>
 		private static Theme placeholderTheme = new Theme {
             BackImageName = "Cardback",
-			cards = {
+			cards = new List<Card>{
 			    new Card
 			    {
 				    Name = "blue"
@@ -67,6 +67,7 @@ namespace MemoryProject
 			TmpCardsList.AddRange(placeholderTheme.cards);
 
 			GameGrid gameGrid = new GameGrid();
+	        gameGrid.cards = new Dictionary<string, Card>();
 
 			for (var row = 0; row < rows; row++)
             {
