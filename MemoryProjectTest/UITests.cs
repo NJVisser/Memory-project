@@ -25,7 +25,7 @@ namespace MemoryProjectTest
             var newGameWindow = application.GetWindow("New Game", InitializeOption.NoCache);
             var NewGameGridButton = newGameWindow.Get<Button>("4X4Button");
             NewGameGridButton.Click();
-           return application.GetWindow("Name The Game");
+            return application.GetWindow("Name The Game");
         } 
 
 

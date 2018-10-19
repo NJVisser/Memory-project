@@ -8,49 +8,49 @@ using System.Collections.Generic;
 
 namespace MemoryProject
 {
-	public sealed class GridFactory
-	{
+    public class GridFactory
+    {
 
-		static Random rnd = new Random();
-		/// <summary>
-		/// Placeholder theme only works for 4x4
-		/// </summary>
-		private static Theme placeholderTheme = new Theme {
+        static Random rnd = new Random();
+        /// <summary>
+        /// Placeholder theme only works for 4x4
+        /// </summary>
+        private static Theme placeholderTheme = new Theme {
             BackImageName = "Cardback",
-			cards = new List<Card>{
-			    new Card
-			    {
-				    Name = "blue"
-			    },
-			    new Card
-			    {
-					Name = "red"
-			    },
-			    new Card
-			    {
-					Name = "brown"
-			    },
-			    new Card
-			    {
-					Name = "green"
-			    },
-			    new Card
-			    {
-					Name = "orange"
-			    },
-			    new Card
-			    {
-					Name = "yellow"
-			    },
-			    new Card
-			    {
-					Name = "purple"
-			    },
-			    new Card
-			    {
+            cards = new List<Card>{
+                new Card
+                {
+                    Name = "blue"
+                },
+                new Card
+                {
+                    Name = "red"
+                },
+                new Card
+                {
+                    Name = "brown"
+                },
+                new Card
+                {
+                    Name = "green"
+                },
+                new Card
+                {
+                    Name = "orange"
+                },
+                new Card
+                {
+                    Name = "yellow"
+                },
+                new Card
+                {
+                    Name = "purple"
+                },
+                new Card
+                {
                     Name = "pink"
-			    }
-			},
+                }
+            },
 
         };
 
@@ -62,49 +62,46 @@ namespace MemoryProject
         /// <param name="rows">Amount of rows</param>
         internal GameGrid InitializeGameGrid(int cols, int rows)
         {
-			var TmpCardsList = new List<Card>();
-			TmpCardsList.AddRange(placeholderTheme.cards);
-			TmpCardsList.AddRange(placeholderTheme.cards);
+            var TmpCardsList = new List<Card>();
+            TmpCardsList.AddRange(placeholderTheme.cards);
+            TmpCardsList.AddRange(placeholderTheme.cards);
 
-			GameGrid gameGrid = new GameGrid();
-	        gameGrid.cards = new Dictionary<string, Card>();
+            var gameGrid = new GameGrid {cards = new Dictionary<string, Card>()};
 
-			for (var row = 0; row < rows; row++)
+            for (var row = 0; row < rows; row++)
             {
                 for (var column = 0; column < cols; column++)
                 {
 
-					var RCard = TmpCardsList[rnd.Next(TmpCardsList.Count)];
-					TmpCardsList.Remove(RCard);
+                    var RCard = TmpCardsList[rnd.Next(TmpCardsList.Count)];
+                    TmpCardsList.Remove(RCard);
 
-					var backgroundImage = new Image
+                    var backgroundImage = new Image
                     {
                         Source = new BitmapImage(new Uri($"Images/Placeholders/{placeholderTheme.BackImageName}.png", UriKind.Relative))
                     };
                     backgroundImage.Name = $"I{row}X{column}";
                     backgroundImage.MouseDown += GridManager.Instance.ClickCard;
-					Grid.SetColumn(backgroundImage, column);
+                    Grid.SetColumn(backgroundImage, column);
                     Grid.SetRow(backgroundImage, row);
-	                GridManager.Instance.LiveGameGrid.Children.Add(backgroundImage);
+                    GridManager.Instance.LiveGameGrid.Children.Add(backgroundImage);
 
-					RCard.Row = row;
-					RCard.Column = column;
-					gameGrid.cards.Add(backgroundImage.Name, RCard);
+                    RCard.Row = row;
+                    RCard.Column = column;
+                    gameGrid.cards.Add(backgroundImage.Name, RCard);
 
-				}
+                }
             }
-			return gameGrid;
-		}
+            return gameGrid;
+        }
 		
-		
-		
-		private static readonly Lazy<GridFactory> LazyGridFactory =
-			new Lazy<GridFactory>(() => new GridFactory());
+        private static readonly Lazy<GridFactory> LazyGridFactory =
+            new Lazy<GridFactory>(() => new GridFactory());
     
-		public static GridFactory Instance => LazyGridFactory.Value;
+        public static GridFactory Instance => LazyGridFactory.Value;
 
-		private GridFactory()
-		{
-		}
+        private GridFactory()
+        {
+        }
     }
 }
