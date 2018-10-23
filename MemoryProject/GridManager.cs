@@ -11,11 +11,11 @@ namespace MemoryProject
     {
         private UniformGrid _uniformGrid;
         private GameGrid _gameGrid;
-        int score = 0;
-        Card check = new Card();
+        private int _score;
+        private Label _scoreLabel;
+        private Card _check;
 
-	    
-
+	   
         public void NewGrid(int size)
         {
             Clear();
@@ -37,31 +37,32 @@ namespace MemoryProject
 
             x.IsClicked = true;
 
-            //more arguements need to be added for a more precise check
-            if (check.Name == x.Name)
+            //more arguments need to be added for a more precise check
+            if (_check.Name == x.Name)
             {
-                score++;
-                check.Name = null;
+                _score++;
+                _scoreLabel.Content = $"Score: {_score}";
+                _check.Name = null;
                 x.IsClicked = false;
-                check.IsClicked = false;
+                _check.IsClicked = false;
                 x.IsGone = true;
-                check.IsGone = true;
+                _check.IsGone = true;
                 return;
             }
-            else if (check.Name == null || check.Name == "") //'check.Name == ""' *because in data the value is set to it by default
+
+            if (string.IsNullOrEmpty(_check.Name)) //'check.Name == ""' *because in data the value is set to it by default
             {
-                check.Name = x.Name;
-                check.IsClicked = true;
+                _check.Name = x.Name;
+                _check.IsClicked = true;
                 return;
             }
 
             //deselect incorrect cards so they flip back adn Flip image back to card back
-            if(check.Name != x.Name && x.IsClicked == true && check.IsClicked == true)
+            if(_check.Name != x.Name && _check.IsClicked)
             {
                 x.IsClicked = false;
-                check.IsClicked = false;
+                _check.IsClicked = false;
                 //some method to change cards back to "Carback"
-                return;
             }
         }
 
@@ -73,6 +74,10 @@ namespace MemoryProject
             _uniformGrid?.Children.Clear();
         }
 	    
+        internal void SetScoreLabel(Label s)
+        {
+            _scoreLabel = s;
+        }
 	    
         public UniformGrid LiveGameGrid
         {

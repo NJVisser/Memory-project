@@ -10,8 +10,8 @@ namespace MemoryProject
 {
     public class GridFactory
     {
-
         static Random rnd = new Random();
+        
         /// <summary>
         /// Placeholder theme only works for 4x4
         /// </summary>

@@ -1,6 +1,4 @@
-﻿using MemoryProject.Data;
-
-namespace MemoryProject
+﻿namespace MemoryProject
 {
     /// <summary>
     ///     Interaction logic for MainWindow.xaml
@@ -12,6 +10,7 @@ namespace MemoryProject
         {
             InitializeComponent();
             GridManager.Instance.LiveGameGrid = LiveGameGrid;
+            GridManager.Instance.SetScoreLabel(Score1);
         }
     }
 }
