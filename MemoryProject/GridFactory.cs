@@ -5,19 +5,24 @@ using System.Windows.Controls.Primitives;
 using MemoryProject.Data;
 using Grid = System.Windows.Controls.Grid;
 using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Input;
+using System.Linq.Expressions;
 
 namespace MemoryProject
 {
     public class GridFactory
     {
         static Random rnd = new Random();
-        
+
         /// <summary>
         /// Placeholder theme only works for 4x4
         /// </summary>
-        private static Theme placeholderTheme = new Theme {
+        public readonly Theme PlaceholderTheme = new Theme
+        {
             BackImageName = "Cardback",
-            cards = new List<Card>{
+            cards = new List<Card>
+            {
                 new Card
                 {
                     Name = "blue"
@@ -51,7 +56,6 @@ namespace MemoryProject
                     Name = "pink"
                 }
             },
-
         };
 
 
@@ -63,8 +67,8 @@ namespace MemoryProject
         internal GameGrid InitializeGameGrid(int cols, int rows)
         {
             var TmpCardsList = new List<Card>();
-            TmpCardsList.AddRange(placeholderTheme.cards);
-            TmpCardsList.AddRange(placeholderTheme.cards);
+            TmpCardsList.AddRange(PlaceholderTheme.cards);
+            TmpCardsList.AddRange(PlaceholderTheme.cards);
 
             var gameGrid = new GameGrid {cards = new Dictionary<string, Card>()};
 
@@ -72,16 +76,20 @@ namespace MemoryProject
             {
                 for (var column = 0; column < cols; column++)
                 {
-
-                    //var RCard = TmpCardsList[rnd.Next(TmpCardsList.Count)];
-                    var RCard = TmpCardsList[0]; // *remove this line after tests
+                    var RCard = TmpCardsList[rnd.Next(TmpCardsList.Count)];
                     TmpCardsList.Remove(RCard);
 
-					var backgroundImage = new Image
+                    var name = TmpCardsList.Exists(item => item.Name == RCard.Name)
+                        ? RCard.Name
+                        : $"{RCard.Name}Pair";
+
+                    var backgroundImage = new Image
                     {
-                        Source = new BitmapImage(new Uri($"Images/Placeholders/{placeholderTheme.BackImageName}.png", UriKind.Relative))
+                        Source = new BitmapImage(new Uri($"Images/Placeholders/{PlaceholderTheme.BackImageName}.png",
+                            UriKind.Relative)),
+                        Cursor = Cursors.Hand,
+                        Name = name
                     };
-                    backgroundImage.Name = $"I{row}X{column}";
                     backgroundImage.MouseDown += GridManager.Instance.ClickCard;
                     Grid.SetColumn(backgroundImage, column);
                     Grid.SetRow(backgroundImage, row);
@@ -89,16 +97,16 @@ namespace MemoryProject
 
                     RCard.Row = row;
                     RCard.Column = column;
-                    gameGrid.cards.Add(backgroundImage.Name, RCard);
-
+                    gameGrid.cards.Add(name, RCard);
                 }
             }
+
             return gameGrid;
         }
-		
+
         private static readonly Lazy<GridFactory> LazyGridFactory =
             new Lazy<GridFactory>(() => new GridFactory());
-    
+
         public static GridFactory Instance => LazyGridFactory.Value;
 
         private GridFactory()

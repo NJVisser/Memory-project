@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Threading;
 using NUnit.Framework;
 using TestStack.White;
 using TestStack.White.Factory;
@@ -11,6 +13,19 @@ namespace MemoryProjectTest
     [NonParallelizable]
     public class UITests
     {
+        private string[] CardNames =
+        {
+            "blue", "bluePair",
+            "red", "redPair",
+            "brown", "brownPair",
+            "green", "greenPair",
+            "orange", "orangePair",
+            "yellow", "yellowPair",
+            "purple", "purplePair",
+            "pink", "pinkPair"
+        };
+
+
         private static Application StartApplication()
         {
             return Application.Launch(Path.Combine(TestContext.CurrentContext.TestDirectory, @"MemoryProject.exe"));
@@ -26,8 +41,7 @@ namespace MemoryProjectTest
             var NewGameGridButton = newGameWindow.Get<Button>("4X4Button");
             NewGameGridButton.Click();
             return application.GetWindow("Name The Game");
-        } 
-
+        }
 
 
         [Test, Order(1)]
@@ -45,7 +59,7 @@ namespace MemoryProjectTest
             startUpMainWindow.Get<Button>("Settings").Click();
             startUpMainWindow.Close();
         }
-        
+
         [Test, Order(3)]
         public void Close()
         {
@@ -59,17 +73,22 @@ namespace MemoryProjectTest
         public void PlayGame()
         {
             var mainGameWindow = CreateMainGameWindow();
-            
-            for (var row = 0; row < 4; row++)
+
+            mainGameWindow.Get<Image>("blue").Click();
+            mainGameWindow.Get<Image>("green").Click();
+
+            Thread.Sleep(TimeSpan.FromSeconds(2));
+
+            StringAssert.AreEqualIgnoringCase("Score: 0", mainGameWindow.Get<Label>("Score1").Text);
+
+            foreach (var cardName in CardNames)
             {
-                for (var column = 0; column < 4; column++)
-                {
-                    mainGameWindow.Get<Image>($"I{row}X{column}").Click();
-                }
+                mainGameWindow.Get<Image>(cardName).Click();
             }
+
+            StringAssert.AreEqualIgnoringCase("Score: 8", mainGameWindow.Get<Label>("Score1").Text);
+
             mainGameWindow.Close();
         }
-        
-        
     }
 }
