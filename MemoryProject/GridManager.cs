@@ -35,14 +35,17 @@ namespace MemoryProject
 			var x = _gameGrid.cards[Card.Name];
 			Card.Source = new BitmapImage(new Uri($"Images/Placeholders/{x.Name}.png", UriKind.Relative));
 
-            //x.IsClicked = true;
+            x.IsClicked = true;
 
             //more arguements need to be added for a more precise check
             if (check.Name == x.Name)
             {
                 score++;
                 check.Name = null;
-                //x.IsClicked = false;
+                x.IsClicked = false;
+                check.IsClicked = false;
+                x.IsGone = true;
+                check.IsGone = true;
                 return;
             }
             else if (check.Name == null || check.Name == "") //'check.Name == ""' *because in data the value is set to it by default
@@ -51,11 +54,13 @@ namespace MemoryProject
                 check.IsClicked = true;
             }
 
-            //trying to deselect incorrectcards so they flip back
+            //deselect incorrect cards so they flip back adn Flip image back to card back
             if(check.Name != x.Name && x.IsClicked == true && check.IsClicked == true)
             {
                 x.IsClicked = false;
                 check.IsClicked = false;
+                //some method to change cards back to "Carback"
+                return;
             }
         }
 
