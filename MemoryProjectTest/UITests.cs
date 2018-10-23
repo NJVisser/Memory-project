@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using NUnit.Framework;
 using TestStack.White;
@@ -109,16 +110,14 @@ namespace MemoryProjectTest
         public void PlayGameWrong()
         {
             var tmpCardsList = new List<string>();
-            tmpCardsList.AddRange(CardNames);
-            var rnd = new Random();
+            tmpCardsList.AddRange(CardNames.Where((c,i) => i % 2 != 0));
+            tmpCardsList.AddRange(CardNames.Where((c,i) => i % 2 == 0));
 
             var mainGameWindow = CreateMainGameWindow();
-
-            while (tmpCardsList.Count > 0)
+            
+            foreach (var cardName in tmpCardsList)
             {
-                var rCard = tmpCardsList[rnd.Next(tmpCardsList.Count)];
-                tmpCardsList.Remove(rCard);
-                mainGameWindow.Get<Image>(rCard).Click();
+                mainGameWindow.Get<Image>(cardName).Click();
             }
 
             StringAssert.AreEqualIgnoringCase("Score: 0", mainGameWindow.Get<Label>("Score1").Text);
