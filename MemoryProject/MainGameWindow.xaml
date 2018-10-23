@@ -7,6 +7,8 @@
         Title="Name The Game" Height="450" Width="800">
     <Grid>
         <Label Name="Score1"  Content="Score: 0" />
+        <Button Content="New Game" HorizontalAlignment="Right" Margin="10,5" VerticalAlignment="Top" Width="100" Height="30" 
+                Click="RestartGame" AutomationProperties.AutomationId="RestartGame" />
 		<UniformGrid x:Name="LiveGameGrid" Margin="50,50,50,20"/>
     </Grid>
 </Window>

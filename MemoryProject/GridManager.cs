@@ -23,7 +23,6 @@ namespace MemoryProject
 
         public void NewGrid(int size)
         {
-            Clear();
             _gameGrid = GridFactory.Instance.InitializeGameGrid(size, size);
         }
 
@@ -107,9 +106,10 @@ namespace MemoryProject
             _uniformGrid?.Children.Clear();
         }
 
-        internal void SetScoreLabel(Label s)
+        internal Label ScoreLabel
         {
-            _scoreLabel = s;
+            get => _scoreLabel;
+            set => _scoreLabel = value;
         }
 
         public UniformGrid LiveGameGrid

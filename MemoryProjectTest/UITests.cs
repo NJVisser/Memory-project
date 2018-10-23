@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using NUnit.Framework;
@@ -26,6 +27,8 @@ namespace MemoryProjectTest
         };
 
 
+        #region Helper functions
+
         private static Application StartApplication()
         {
             return Application.Launch(Path.Combine(TestContext.CurrentContext.TestDirectory, @"MemoryProject.exe"));
@@ -33,16 +36,24 @@ namespace MemoryProjectTest
 
         private static Window CreateMainGameWindow()
         {
-            var application = StartApplication();
+            return CreateMainGameWindow(StartApplication());
+        }
+
+        private static Window CreateMainGameWindow(Application application)
+        {
             var mainWindow = application.GetWindow("Name The Game Main Menu", InitializeOption.NoCache);
-            var NGbutton = mainWindow.Get<Button>("NewGame");
-            NGbutton.Click();
+            var nGButton = mainWindow.Get<Button>("NewGame");
+            nGButton.Click();
             var newGameWindow = application.GetWindow("New Game", InitializeOption.NoCache);
-            var NewGameGridButton = newGameWindow.Get<Button>("4X4Button");
-            NewGameGridButton.Click();
+            var newGameGridButton = newGameWindow.Get<Button>("4X4Button");
+            newGameGridButton.Click();
             return application.GetWindow("Name The Game");
         }
 
+        #endregion
+
+
+        #region Tests
 
         [Test, Order(1)]
         public void NewGame()
@@ -52,6 +63,16 @@ namespace MemoryProjectTest
         }
 
         [Test, Order(2)]
+        public void RestartGame()
+        {
+            var app = StartApplication();
+            var mainGameWindow = CreateMainGameWindow(app);
+            mainGameWindow.Get<Button>("RestartGame").Click();
+            var newWindow = CreateMainGameWindow(app);
+            newWindow.Close();
+        }
+
+        [Test, Order(3)]
         public void Settings()
         {
             var application = StartApplication();
@@ -60,7 +81,7 @@ namespace MemoryProjectTest
             startUpMainWindow.Close();
         }
 
-        [Test, Order(3)]
+        [Test, Order(4)]
         public void Close()
         {
             var application = StartApplication();
@@ -68,18 +89,11 @@ namespace MemoryProjectTest
             var button = mainWindow.Get<Button>("Exit");
             button.Click();
         }
-
-        [Test]
+        
+        [Test, Order(5)]
         public void PlayGame()
         {
             var mainGameWindow = CreateMainGameWindow();
-
-            mainGameWindow.Get<Image>("blue").Click();
-            mainGameWindow.Get<Image>("green").Click();
-
-            Thread.Sleep(TimeSpan.FromSeconds(2));
-
-            StringAssert.AreEqualIgnoringCase("Score: 0", mainGameWindow.Get<Label>("Score1").Text);
 
             foreach (var cardName in CardNames)
             {
@@ -90,5 +104,28 @@ namespace MemoryProjectTest
 
             mainGameWindow.Close();
         }
+
+        [Test]
+        public void PlayGameWrong()
+        {
+            var tmpCardsList = new List<string>();
+            tmpCardsList.AddRange(CardNames);
+            var rnd = new Random();
+
+            var mainGameWindow = CreateMainGameWindow();
+
+            while (tmpCardsList.Count > 0)
+            {
+                var rCard = tmpCardsList[rnd.Next(tmpCardsList.Count)];
+                tmpCardsList.Remove(rCard);
+                mainGameWindow.Get<Image>(rCard).Click();
+            }
+
+            StringAssert.AreEqualIgnoringCase("Score: 0", mainGameWindow.Get<Label>("Score1").Text);
+
+            mainGameWindow.Close();
+        }
+
+        #endregion
     }
 }
