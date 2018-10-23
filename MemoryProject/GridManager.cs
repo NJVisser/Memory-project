@@ -52,6 +52,7 @@ namespace MemoryProject
             {
                 check.Name = x.Name;
                 check.IsClicked = true;
+                return;
             }
 
             //deselect incorrect cards so they flip back adn Flip image back to card back

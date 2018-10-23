@@ -77,9 +77,6 @@ namespace MemoryProject
                     var RCard = TmpCardsList[0]; // *remove this line after tests
                     TmpCardsList.Remove(RCard);
 
-					var RCard = TmpCardsList[rnd.Next(TmpCardsList.Count)];
-					TmpCardsList.Remove(RCard);
-
 					var backgroundImage = new Image
                     {
                         Source = new BitmapImage(new Uri($"Images/Placeholders/{placeholderTheme.BackImageName}.png", UriKind.Relative))
@@ -109,7 +106,3 @@ namespace MemoryProject
         }
     }
 }
-                    var RCard = TmpCardsList[rnd.Next(TmpCardsList.Count)];
-                    TmpCardsList.Remove(RCard);
-
-                    var backgroundImage = new Image
