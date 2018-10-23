@@ -11,6 +11,8 @@ namespace MemoryProject
     {
         private UniformGrid _uniformGrid;
         private GameGrid _gameGrid;
+        int score = 0;
+        Card check = new Card();
 
 	    
 
@@ -20,19 +22,47 @@ namespace MemoryProject
             _gameGrid = GridFactory.Instance.InitializeGameGrid(size, size);
         }
 
-        /// <summary>
-        /// Card Clicker
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public void ClickCard(object sender, MouseButtonEventArgs e)
+		/// <summary>
+		/// Card Clicker
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		public void ClickCard(object sender, MouseButtonEventArgs e)
         {
             //((Image) sender).Source = new BitmapImage(new Uri("Images/Placeholders/CSharp.jpg", UriKind.Relative));
 
-            var card = ((Image)sender);
-            var x = _gameGrid.cards[card.Name];
-            card.Source = new BitmapImage(new Uri($"Images/Placeholders/{x.Name}.png", UriKind.Relative));
+            var Card = ((Image)sender);
+			var x = _gameGrid.cards[Card.Name];
+			Card.Source = new BitmapImage(new Uri($"Images/Placeholders/{x.Name}.png", UriKind.Relative));
 
+            x.IsClicked = true;
+
+            //more arguements need to be added for a more precise check
+            if (check.Name == x.Name)
+            {
+                score++;
+                check.Name = null;
+                x.IsClicked = false;
+                check.IsClicked = false;
+                x.IsGone = true;
+                check.IsGone = true;
+                return;
+            }
+            else if (check.Name == null || check.Name == "") //'check.Name == ""' *because in data the value is set to it by default
+            {
+                check.Name = x.Name;
+                check.IsClicked = true;
+                return;
+            }
+
+            //deselect incorrect cards so they flip back adn Flip image back to card back
+            if(check.Name != x.Name && x.IsClicked == true && check.IsClicked == true)
+            {
+                x.IsClicked = false;
+                check.IsClicked = false;
+                //some method to change cards back to "Carback"
+                return;
+            }
         }
 
         /// <summary>

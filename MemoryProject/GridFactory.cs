@@ -73,10 +73,11 @@ namespace MemoryProject
                 for (var column = 0; column < cols; column++)
                 {
 
-                    var RCard = TmpCardsList[rnd.Next(TmpCardsList.Count)];
+                    //var RCard = TmpCardsList[rnd.Next(TmpCardsList.Count)];
+                    var RCard = TmpCardsList[0]; // *remove this line after tests
                     TmpCardsList.Remove(RCard);
 
-                    var backgroundImage = new Image
+					var backgroundImage = new Image
                     {
                         Source = new BitmapImage(new Uri($"Images/Placeholders/{placeholderTheme.BackImageName}.png", UriKind.Relative))
                     };
