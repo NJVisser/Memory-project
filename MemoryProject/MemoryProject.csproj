@@ -92,12 +92,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Placeholders\100x100.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Placeholders\CSharp.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Placeholders\blue.png" />
     <Resource Include="Images\Placeholders\brown.png" />
     <Resource Include="Images\Placeholders\green.png" />
@@ -109,6 +103,20 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Placeholders\Cardback.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Placeholders\blueGrey.png" />
+    <Resource Include="Images\Placeholders\darkRed.png" />
+    <Resource Include="Images\Placeholders\gold.png" />
+    <Resource Include="Images\Placeholders\grey.png" />
+    <Resource Include="Images\Placeholders\lavender.png" />
+    <Resource Include="Images\Placeholders\lightGreen.png" />
+    <Resource Include="Images\Placeholders\lightGrey.png" />
+    <Resource Include="Images\Placeholders\lightTurquoise.png" />
+    <Resource Include="Images\Placeholders\lightYellow.png" />
+    <Resource Include="Images\Placeholders\lime.png" />
+    <Resource Include="Images\Placeholders\turquoise.png" />
+    <Resource Include="Images\Placeholders\white.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

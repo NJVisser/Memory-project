@@ -16,7 +16,7 @@ namespace MemoryProject
         static Random rnd = new Random();
 
         /// <summary>
-        /// Placeholder theme only works for 4x4
+        /// supports a game upto 20 Pairs a.k.a 40 Cards
         /// </summary>
         public readonly Theme PlaceholderTheme = new Theme
         {
@@ -54,6 +54,54 @@ namespace MemoryProject
                 new Card
                 {
                     Name = "pink"
+                },
+                new Card
+                {
+                    Name = "blueGrey"
+                },
+                new Card
+                {
+                    Name = "darkRed"
+                },
+                new Card
+                {
+                    Name = "gold"
+                },
+                new Card
+                {
+                    Name = "grey"
+                },
+                new Card
+                {
+                    Name = "lavender"
+                },
+                new Card
+                {
+                    Name = "lightGreen"
+                },
+                new Card
+                {
+                    Name = "lightGrey"
+                },
+                new Card
+                {
+                    Name = "lightTurquoise"
+                },
+                new Card
+                {
+                    Name = "lightYellow"
+                },
+                new Card
+                {
+                    Name = "lime"
+                },
+                new Card
+                {
+                    Name = "turquoise"
+                },
+                new Card
+                {
+                    Name = "white"
                 }
             },
         };
