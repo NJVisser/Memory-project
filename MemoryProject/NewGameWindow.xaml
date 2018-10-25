@@ -5,23 +5,34 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:MemoryProject"
         mc:Ignorable="d"
-        Title="New Game" Height="250" Width="250">
-    <StackPanel Margin="10" VerticalAlignment="Center">
-		<DockPanel VerticalAlignment="Center" Margin="10">
-			<Button AutomationProperties.AutomationId="4X4Button" Content="4X4" Tag="4" HorizontalAlignment="Left"
-                    Margin="10" VerticalAlignment="Top" Width="75" Height="75"  Click="OnButtonClick" />
-			<Button AutomationProperties.AutomationId="5X5Button" Content="5X5" Tag="5" HorizontalAlignment="Right"
-                    Margin="10" VerticalAlignment="Top" Width="75" Height="75" Click="OnButtonClick" />
-			
-		</DockPanel>
+        Title="New Game" Height="366.517" Width="514.459">
+    <StackPanel Margin="10" VerticalAlignment="Top">
 
 
-		<DockPanel VerticalAlignment="Center" Margin="10">
-			<Button AutomationProperties.AutomationId="6X6Button" Content="6X6" Tag="6" HorizontalAlignment="Left"
-                    Margin="10" VerticalAlignment="Top" Width="75" Height="75" Click="OnButtonClick" />
-			<Button AutomationProperties.AutomationId="7X7Button" Content="7X7" Tag="7" HorizontalAlignment="Right"
-                    Margin="10" VerticalAlignment="Top" Width="75" Height="75" Click="OnButtonClick" />
-		</DockPanel>
+        <DockPanel VerticalAlignment="Center" Margin="10" RenderTransformOrigin="0.494,0.157">
+            <Button AutomationProperties.AutomationId="4X4Button" Content="4X4" Tag="4" HorizontalAlignment="Left"
+                    Margin="10" VerticalAlignment="Top" Width="50" Height="50"  Click="OnButtonClick" />
+            <Button AutomationProperties.AutomationId="5X5Button" Content="5X5" Tag="5" HorizontalAlignment="Right"
+                    Margin="10" VerticalAlignment="Top" Width="50" Height="50" Click="OnButtonClick" />
 
-	</StackPanel>
+        </DockPanel>
+
+
+        <DockPanel VerticalAlignment="Center" Margin="10">
+            <Button AutomationProperties.AutomationId="6X6Button" Content="6X6" Tag="6" HorizontalAlignment="Left"
+                    Margin="10" VerticalAlignment="Top" Width="50" Height="50" Click="OnButtonClick" />
+            <Button AutomationProperties.AutomationId="7X7Button" Content="7X7" Tag="7" HorizontalAlignment="Right"
+                    Margin="10" VerticalAlignment="Top" Width="50" Height="50" Click="OnButtonClick" />
+        </DockPanel>
+        
+        <StackPanel Orientation="Horizontal">
+            <Label Name="label1" Content="Player1" Height="25" Width="50"/>
+            <TextBox Name="textbox1" Width="100" Height="20" Margin="5" />
+            <Label Name="label2" Content="Player2" Height="25" Width="50"/>
+            <TextBox Name="textbox2" Width="100" Height="20" Margin="5"/>
+            <Button Name="button" Content="Set Names" Height="25" VerticalAlignment="Top" Width="100" Margin="5" Click="Click_Button"/>
+        </StackPanel>
+
+
+    </StackPanel>
 </Window>

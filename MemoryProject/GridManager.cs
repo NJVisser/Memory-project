@@ -20,6 +20,8 @@ namespace MemoryProject
         private readonly Image[] _clickedCards = new Image[2];
         private bool _isBusy;
 
+        private Label _playerName1;
+        private Label _playerName2;
 
         public void NewGrid(int size)
         {
@@ -115,6 +117,18 @@ namespace MemoryProject
         {
             get => _uniformGrid;
             set => _uniformGrid = value;
+        }
+
+
+        public Label PlayerName1
+        {
+            get => _playerName1;
+            set => _playerName1 = value;
+        }
+        public Label PlayerName2
+        {
+            get => _playerName2;
+            set => _playerName2 = value;
         }
 
         private static readonly Lazy<GridManager> LazyGridManager =
