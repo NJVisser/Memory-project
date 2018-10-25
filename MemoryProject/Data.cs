@@ -9,6 +9,7 @@ namespace MemoryProject.Data
         public int Column;
         public int Row;
         public string Name;
+        public string ID;
         public bool IsClicked;
         public bool IsGone;
     }

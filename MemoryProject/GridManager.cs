@@ -35,7 +35,6 @@ namespace MemoryProject
         {
             if (_isBusy) return;
 
-
             var img = (Image) sender;
             var card = _gameGrid.cards[img.Name];
             img.Source = new BitmapImage(new Uri($"Images/Placeholders/{card.Name}.png", UriKind.Relative));
