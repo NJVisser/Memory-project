@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Windows.Media.Imaging;
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using MemoryProject.Data;
-using Grid = System.Windows.Controls.Grid;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Windows.Controls;
 using System.Windows.Input;
-using System.Linq.Expressions;
+using System.Windows.Media.Imaging;
+using MemoryProject.Data;
+using Newtonsoft.Json;
 
 namespace MemoryProject
 {
@@ -18,93 +17,9 @@ namespace MemoryProject
         /// <summary>
         /// supports a game upto 20 Pairs a.k.a 40 Cards
         /// </summary>
-        public readonly Theme PlaceholderTheme = new Theme
-        {
-            BackImageName = "Cardback",
-            cards = new List<Card>
-            {
-                new Card
-                {
-                    Name = "blue"
-                },
-                new Card
-                {
-                    Name = "red"
-                },
-                new Card
-                {
-                    Name = "brown"
-                },
-                new Card
-                {
-                    Name = "green"
-                },
-                new Card
-                {
-                    Name = "orange"
-                },
-                new Card
-                {
-                    Name = "yellow"
-                },
-                new Card
-                {
-                    Name = "purple"
-                },
-                new Card
-                {
-                    Name = "pink"
-                },
-                new Card
-                {
-                    Name = "blueGrey"
-                },
-                new Card
-                {
-                    Name = "darkRed"
-                },
-                new Card
-                {
-                    Name = "gold"
-                },
-                new Card
-                {
-                    Name = "grey"
-                },
-                new Card
-                {
-                    Name = "lavender"
-                },
-                new Card
-                {
-                    Name = "lightGreen"
-                },
-                new Card
-                {
-                    Name = "lightGrey"
-                },
-                new Card
-                {
-                    Name = "lightTurquoise"
-                },
-                new Card
-                {
-                    Name = "lightYellow"
-                },
-                new Card
-                {
-                    Name = "lime"
-                },
-                new Card
-                {
-                    Name = "turquoise"
-                },
-                new Card
-                {
-                    Name = "white"
-                }
-            }
-        };
+        public readonly Theme PlaceholderTheme =
+            JsonConvert.DeserializeObject<Theme>(
+                File.ReadAllText($@"{AppDomain.CurrentDomain.BaseDirectory}\Themes\PlaceholderTheme.json"));
 
 
         /// <summary>

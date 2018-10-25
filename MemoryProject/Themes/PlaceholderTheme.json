@@ -1,0 +1,65 @@
+{
+  "cards": [
+    {
+      "Name": "blue"
+    },
+    {
+      "Name": "red"
+    },
+    {
+      "Name": "brown"
+    },
+    {
+      "Name": "green"
+    },
+    {
+      "Name": "orange"
+    },
+    {
+      "Name": "yellow"
+    },
+    {
+      "Name": "purple"
+    },
+    {
+      "Name": "pink"
+    },
+    {
+      "Name": "blueGrey"
+    },
+    {
+      "Name": "darkRed"
+    },
+    {
+      "Name": "gold"
+    },
+    {
+      "Name": "grey"
+    },
+    {
+      "Name": "lavender"
+    },
+    {
+      "Name": "lightGreen"
+    },
+    {
+      "Name": "lightGrey"
+    },
+    {
+      "Name": "lightTurquoise"
+    },
+    {
+      "Name": "lightYellow"
+    },
+    {
+      "Name": "lime"
+    },
+    {
+      "Name": "turquoise"
+    },
+    {
+      "Name": "white"
+    }
+  ],
+  "BackImageName": "Cardback"
+}
