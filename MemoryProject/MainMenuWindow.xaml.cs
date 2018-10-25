@@ -1,4 +1,5 @@
 using System.Windows;
+using AGC.Tools;
 
 namespace MemoryProject
 {
@@ -7,6 +8,7 @@ namespace MemoryProject
         public MainMenuWindow()
         {
             InitializeComponent();
+            AGCTools.SetupLogger();
         }
 
         private void NewGame(object sender, RoutedEventArgs routedEventArgs)

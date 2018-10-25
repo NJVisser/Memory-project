@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,20 +13,19 @@ namespace MemoryProject
 {
     public class GridManager
     {
-        private UniformGrid _uniformGrid;
-        private GameGrid _gameGrid;
-        private int _score;
-        private Label _scoreLabel;
         private Card _check;
         private readonly Image[] _clickedCards = new Image[2];
         private bool _isBusy;
 
-        private Label _playerName1;
-        private Label _playerName2;
+        internal Label ScoreLabel { get; set; }
+        internal SingleGame LiveGame { get; set; } = new SingleGame {Grid = new Dictionary<string, Card>()};
+        internal UniformGrid LiveGameGrid { get; set; }
+        internal Label Player1Name { get; set; }
+        internal Label Player2Name { get; set; }
 
         public void NewGrid(int size)
         {
-            _gameGrid = GridFactory.Instance.InitializeGameGrid(size, size);
+            LiveGame.Grid = GridFactory.Instance.GenerateGameGrid(size, size);
         }
 
         /// <summary>
@@ -38,43 +38,38 @@ namespace MemoryProject
             if (_isBusy) return;
 
             var img = (Image) sender;
-            var card = _gameGrid.cards[img.Name];
+            var card = LiveGame.Grid[img.Name];
             img.Source = new BitmapImage(new Uri($"Images/Placeholders/{card.Name}.png", UriKind.Relative));
 
             card.IsClicked = true;
 
-            //more arguments need to be added for a more precise check
-            if (_check.Name == card.Name)
+            if (_check == null)
             {
-                _score++;
-                _scoreLabel.Content = $"Score: {_score}";
-                _check.Name = null;
-                card.IsClicked = false;
-                _check.IsClicked = false;
-                card.IsGone = true;
-                _check.IsGone = true;
-                return;
-            }
-
-            if (string.IsNullOrEmpty(_check.Name))
-            {
-                _check.Name = card.Name;
+                _check = card;
                 _check.IsClicked = true;
                 _clickedCards[0] = img;
                 return;
             }
 
+            if (_check.Name == card.Name)
+            {
+                LiveGame.Score++;
+                ScoreLabel.Content = $"Score: {LiveGame.Score}";
+                card.IsClicked = _check.IsClicked = false;
+                card.IsGone = _check.IsGone = true;
+            }
             //deselect incorrect cards so they flip back adn Flip image back to card back
-            if (_check.Name != card.Name && _check.IsClicked)
+            else
             {
                 Mouse.OverrideCursor = Cursors.Wait;
                 _isBusy = true;
-                _check.Name = null;
-                card.IsClicked = false;
-                _check.IsClicked = false;
+                card.IsClicked = _check.IsClicked = false;
                 _clickedCards[1] = img;
+
                 Task.Delay(TimeSpan.FromSeconds(1)).ContinueWith(t => FlipCard(_clickedCards));
             }
+
+            _check = null;
         }
 
         private void FlipCard(Image[] img)
@@ -104,32 +99,19 @@ namespace MemoryProject
         /// </summary>
         internal void Clear()
         {
-            _uniformGrid?.Children.Clear();
+            LiveGame = new SingleGame {Grid = new Dictionary<string, Card>()};
+            LiveGameGrid?.Children.Clear();
         }
 
-        internal Label ScoreLabel
+        internal void SetPlayerNames(string p1, string p2)
         {
-            get => _scoreLabel;
-            set => _scoreLabel = value;
+            Player1Name.Content = p1;
+            LiveGame.Player1Name = p1;
+            Player2Name.Content = p2;
+            LiveGame.Player2Name = p2;
         }
 
-        public UniformGrid LiveGameGrid
-        {
-            get => _uniformGrid;
-            set => _uniformGrid = value;
-        }
-
-
-        public Label PlayerName1
-        {
-            get => _playerName1;
-            set => _playerName1 = value;
-        }
-        public Label PlayerName2
-        {
-            get => _playerName2;
-            set => _playerName2 = value;
-        }
+        #region Singleton
 
         private static readonly Lazy<GridManager> LazyGridManager =
             new Lazy<GridManager>(() => new GridManager());
@@ -139,5 +121,7 @@ namespace MemoryProject
         private GridManager()
         {
         }
+
+        #endregion
     }
 }

@@ -13,8 +13,8 @@ namespace MemoryProject
         {
             InitializeComponent();
 
-            GridManager.Instance.PlayerName1 = label1;
-            GridManager.Instance.PlayerName2 = label2;
+            GridManager.Instance.Player1Name = Player1Name;
+            GridManager.Instance.Player2Name = Player2Name;
             GridManager.Instance.LiveGameGrid = LiveGameGrid;
             GridManager.Instance.ScoreLabel = Score1;
         }
@@ -30,6 +30,16 @@ namespace MemoryProject
             mainWindow.Show();
             Close();
 
+        }
+
+        private void SaveGame(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(SaveGameManager.Instance.SaveGame("Quick") ?  "Game saved!": "Failed to save game", "Game Save");
+        }
+
+        private void LoadGame(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(SaveGameManager.Instance.LoadGame("Quick") ? "Game loaded!": "Failed to load game", "Game Load" );
         }
     }
 }

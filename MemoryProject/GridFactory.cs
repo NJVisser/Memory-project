@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using AGC.Tools;
 using MemoryProject.Data;
 using Newtonsoft.Json;
 
@@ -27,23 +29,17 @@ namespace MemoryProject
         /// </summary>
         /// <param name="cols">Amount of columns</param>
         /// <param name="rows">Amount of rows</param>
-        internal GameGrid InitializeGameGrid(int cols, int rows)
+        internal Dictionary<string, Card> GenerateGameGrid(int cols, int rows)
         {
+            var gameGrid = new Dictionary<string, Card>();
             var cardsNeeded = cols * rows;
             var tmpCardsList = new List<Card>();
-            var cardsUsedList = PlaceholderTheme.cards.Take(cardsNeeded / 2).ToList();
-            cardsUsedList.ForEach(c =>
+            var cardsUsedList = PlaceholderTheme.Cards.Take(cardsNeeded / 2).ToList();
+            foreach (var c in cardsUsedList)
             {
-                c.ID = c.Name;
-                tmpCardsList.Add(c);
-            });
-            cardsUsedList.ForEach(c =>
-            {
-                c.ID = $"{c.Name}Pair";
-                tmpCardsList.Add(c);
-            });
-
-            var gameGrid = new GameGrid {cards = new Dictionary<string, Card>()};
+                tmpCardsList.Add(new Card {Name = c.Name, ID = c.Name});
+                tmpCardsList.Add(new Card {Name = c.Name, ID = $"{c.Name}Pair"});
+            }
 
             for (var row = 0; row < rows; row++)
             {
@@ -66,12 +62,49 @@ namespace MemoryProject
 
                     RCard.Row = row;
                     RCard.Column = column;
-                    gameGrid.cards.Add(RCard.ID, RCard);
+                    gameGrid.Add(RCard.ID, RCard);
                 }
             }
 
             return gameGrid;
         }
+
+
+        internal bool RestoreGameGrid(Dictionary<string, Card> savedGrid)
+        {
+            try
+            {
+                foreach (var card in savedGrid)
+                {
+                    var backgroundImage = new Image
+                    {
+                        Source = card.Value.IsGone
+                            ? new BitmapImage(new Uri($"Images/Placeholders/{card.Value.Name}.png",
+                                UriKind.Relative))
+                            : new BitmapImage(new Uri($"Images/Placeholders/{PlaceholderTheme.BackImageName}.png",
+                                UriKind.Relative)),
+                        Cursor = Cursors.Hand,
+                        Name = card.Key
+                    };
+                    if (!card.Value.IsGone)
+                        backgroundImage.MouseDown += GridManager.Instance.ClickCard;
+
+                    Grid.SetColumn(backgroundImage, card.Value.Column);
+                    Grid.SetRow(backgroundImage, card.Value.Column);
+                    GridManager.Instance.LiveGameGrid.Children.Add(backgroundImage);
+                }
+
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                AGCTools.LogException(e);
+                return false;
+            }
+        }
+
+        #region Singleton
 
         private static readonly Lazy<GridFactory> LazyGridFactory =
             new Lazy<GridFactory>(() => new GridFactory());
@@ -81,5 +114,7 @@ namespace MemoryProject
         private GridFactory()
         {
         }
+
+        #endregion
     }
 }

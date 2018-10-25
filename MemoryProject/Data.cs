@@ -2,7 +2,7 @@
 
 namespace MemoryProject.Data
 {
-    public struct Card
+    public class Card
     {
         public int Column;
         public int Row;
@@ -12,14 +12,19 @@ namespace MemoryProject.Data
         public bool IsGone;
     }
 
-    public struct GameGrid
+    public class SingleGame
     {
-        public Dictionary<string,Card> cards;
+        public string ThemeName;
+        public string Player1Name;
+        public string Player2Name;
+        public int Score;
+        public Dictionary<string,Card> Grid;
     }
 
-    public struct Theme
+    public class Theme
     {
-        public List<Card> cards;
+        public string ThemeName;
+        public List<Card> Cards;
         public string BackImageName;
     }
 }

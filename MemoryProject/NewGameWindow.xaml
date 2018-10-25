@@ -26,11 +26,10 @@
         </DockPanel>
         
         <StackPanel Orientation="Horizontal">
-            <Label Name="label1" Content="Player1" Height="25" Width="50"/>
-            <TextBox Name="textbox1" Width="100" Height="20" Margin="5" />
-            <Label Name="label2" Content="Player2" Height="25" Width="50"/>
-            <TextBox Name="textbox2" Width="100" Height="20" Margin="5"/>
-            <Button Name="button" Content="Set Names" Height="25" VerticalAlignment="Top" Width="100" Margin="5" Click="Click_Button"/>
+            <Label Name="Player1Name" Content="Player1" Height="25" Width="50"/>
+            <TextBox Name="Player1NameInput" Width="100" Height="20" Margin="5" TextChanged="NameUpdated"/>
+            <Label Name="Player2Name" Content="Player2" Height="25" Width="50"/>
+            <TextBox Name="Player2NameInput" Width="100" Height="20" Margin="5" TextChanged="NameUpdated"/>
         </StackPanel>
 
 
