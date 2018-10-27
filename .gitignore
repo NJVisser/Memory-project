@@ -231,3 +231,7 @@ _Pvt_Extensions
 \.idea/
 
 results\.xml
+
+Docs/html/
+
+config
