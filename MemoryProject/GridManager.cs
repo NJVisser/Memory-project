@@ -31,8 +31,6 @@ namespace MemoryProject
         /// <summary>
         /// Card Clicker
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         public void ClickCard(object sender, MouseButtonEventArgs e)
         {
             if (_isBusy) return;
@@ -72,6 +70,11 @@ namespace MemoryProject
             _check = null;
         }
 
+        
+        /// <summary>
+        /// Flip an array of cards back to the background image
+        /// </summary>
+        /// <param name="img">array of images to reset</param>
         private void FlipCard(Image[] img)
         {
             _isBusy = false;

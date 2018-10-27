@@ -12,6 +12,12 @@ namespace MemoryProject
         private readonly string _saveGamesPath =
             $@"{AGCTools.GetGameFolder()}\save";
 
+
+        /// <summary>
+        /// Write a savegame
+        /// </summary>
+        /// <param name="saveName">Name of the save (will be saved as memory-{saveName}.sav)</param>
+        /// <returns>True if  successful, false if an error occurred</returns>
         internal bool SaveGame(string saveName)
         {
             try
@@ -31,7 +37,14 @@ namespace MemoryProject
             }
         }
 
-
+        /// <summary>
+        /// Write a savegame
+        /// </summary>
+        /// <remarks>
+        /// This clears the grid before loading 
+        /// </remarks>
+        /// <param name="saveName">Name of the save to load</param>
+        /// <returns>True if  successful, false if an error occurred</returns>
         internal bool LoadGame(string saveName)
         {
             try
@@ -42,7 +55,7 @@ namespace MemoryProject
                     AGCTools.Log($"memory-{saveName}.sav not found @ {_saveGamesPath}");
                     return false;
                 }
-                
+
                 GridManager.Instance.Clear();
 
                 var save = File.ReadAllBytes(saveGame);
