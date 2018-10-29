@@ -5,8 +5,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using AGC.Tools;
 using MemoryProject.Data;
 
 namespace MemoryProject
@@ -17,15 +19,27 @@ namespace MemoryProject
         private readonly Image[] _clickedCards = new Image[2];
         private bool _isBusy;
 
-        internal Label ScoreLabel { get; set; }
         internal SingleGame LiveGame { get; set; } = new SingleGame {Grid = new Dictionary<string, Card>()};
+
         internal UniformGrid LiveGameGrid { get; set; }
+
         internal Label Player1Name { get; set; }
         internal Label Player2Name { get; set; }
+
+        private readonly SolidColorBrush _green =
+            new SolidColorBrush(Color.FromRgb(Byte.MinValue, Byte.MaxValue, Byte.MinValue));
+
+        private readonly SolidColorBrush _red =
+            new SolidColorBrush(Color.FromRgb(Byte.MaxValue, Byte.MinValue, Byte.MinValue));
+
+        private Turn _playerTurn;
 
         public void NewGrid(int size)
         {
             LiveGame.Grid = GridFactory.Instance.GenerateGameGrid(size, size);
+            _playerTurn = Turn.Player1;
+            Player1Name.Foreground = _green;
+            Player2Name.Foreground = _red;
         }
 
         /// <summary>
@@ -39,6 +53,9 @@ namespace MemoryProject
             var card = LiveGame.Grid[img.Name];
             img.Source = new BitmapImage(new Uri($"Images/Placeholders/{card.Name}.png", UriKind.Relative));
 
+            if (card.IsGone)
+                return;
+
             card.IsClicked = true;
 
             if (_check == null)
@@ -51,17 +68,21 @@ namespace MemoryProject
 
             if (_check.Name == card.Name)
             {
-                LiveGame.Score++;
-                ScoreLabel.Content = $"Score: {LiveGame.Score}";
+                SwitchPlayer(true);
+
                 card.IsClicked = _check.IsClicked = false;
-                card.IsGone = _check.IsGone = true;
+                card.IsGone = true;
+                _check.IsGone = true;
             }
-            //deselect incorrect cards so they flip back adn Flip image back to card back
-            else
+
+            else //deselect incorrect cards so they flip back adn Flip image back to card back
             {
+                SwitchPlayer();
+
                 Mouse.OverrideCursor = Cursors.Wait;
                 _isBusy = true;
-                card.IsClicked = _check.IsClicked = false;
+                card.IsClicked = false;
+                _check.IsClicked = false;
                 _clickedCards[1] = img;
 
                 Task.Delay(TimeSpan.FromSeconds(1)).ContinueWith(t => FlipCard(_clickedCards));
@@ -70,7 +91,46 @@ namespace MemoryProject
             _check = null;
         }
 
-        
+        private void SwitchPlayer(bool scored = false)
+        {
+            if (LiveGame.SinglePlayer)
+            {
+                if (!scored) return;
+                LiveGame.ScoreP1++;
+                Player1Name.Content = $"{LiveGame.Player1Name}: {LiveGame.ScoreP1}";
+                return;
+            }
+
+            switch (_playerTurn)
+            {
+                case Turn.Player1:
+                    if (scored)
+                        LiveGame.ScoreP1++;
+                    else
+                    {
+                        _playerTurn = Turn.Player2;
+                        Player1Name.Foreground = _red;
+                        Player2Name.Foreground = _green;
+                    }
+
+                    Player1Name.Content = $"{LiveGame.Player1Name}: {LiveGame.ScoreP1}";
+                    break;
+                case Turn.Player2:
+                    if (scored)
+                        LiveGame.ScoreP2++;
+                    else
+                    {
+                        _playerTurn = Turn.Player1;
+                        Player1Name.Foreground = _green;
+                        Player2Name.Foreground = _red;
+                    }
+
+                    Player2Name.Content = $"{LiveGame.Player2Name}: {LiveGame.ScoreP2}";
+                    break;
+            }
+        }
+
+
         /// <summary>
         /// Flip an array of cards back to the background image
         /// </summary>
@@ -108,10 +168,19 @@ namespace MemoryProject
 
         internal void SetPlayerNames(string p1, string p2)
         {
-            Player1Name.Content = p1;
+            Player1Name.Content = $"{p1}: {LiveGame.ScoreP1}";
             LiveGame.Player1Name = p1;
-            Player2Name.Content = p2;
-            LiveGame.Player2Name = p2;
+
+            if (string.IsNullOrEmpty(p2))
+            {
+                Player2Name.Content = "";
+                LiveGame.SinglePlayer = true;
+            }
+            else
+            {
+                Player2Name.Content = $"{p2}: {LiveGame.ScoreP2}";
+                LiveGame.Player2Name = p2;
+            }
         }
 
         #region Singleton

@@ -27,9 +27,9 @@
         
         <StackPanel Orientation="Horizontal">
             <Label Name="Player1Name" Content="Player1" Height="25" Width="50"/>
-            <TextBox Name="Player1NameInput" Width="100" Height="20" Margin="5" TextChanged="NameUpdated"/>
+            <TextBox Name="Player1NameInput" Text="" Width="100" Height="20" Margin="5" TextChanged="NameUpdated"/>
             <Label Name="Player2Name" Content="Player2" Height="25" Width="50"/>
-            <TextBox Name="Player2NameInput" Width="100" Height="20" Margin="5" TextChanged="NameUpdated"/>
+            <TextBox Name="Player2NameInput" Text="" Width="100" Height="20" Margin="5" TextChanged="NameUpdated"/>
         </StackPanel>
 
 

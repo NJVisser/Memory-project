@@ -15,9 +15,11 @@ namespace MemoryProject.Data
     public class SingleGame
     {
         public string ThemeName;
+        public bool SinglePlayer;
         public string Player1Name;
         public string Player2Name;
-        public int Score;
+        public int ScoreP1;
+        public int ScoreP2;
         public Dictionary<string,Card> Grid;
     }
 
@@ -26,5 +28,11 @@ namespace MemoryProject.Data
         public string ThemeName;
         public List<Card> Cards;
         public string BackImageName;
+    }
+
+    public enum Turn
+    {
+        Player1,
+        Player2
     }
 }

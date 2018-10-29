@@ -61,9 +61,8 @@ namespace MemoryProject
                 var save = File.ReadAllBytes(saveGame);
                 var data = MessagePackSerializer.Deserialize<SingleGame>(save);
                 GridManager.Instance.LiveGame = data;
-                GridManager.Instance.ScoreLabel.Content = $"Score: {data.Score}";
-                GridManager.Instance.Player1Name.Content = data.Player1Name;
-                GridManager.Instance.Player2Name.Content = data.Player2Name;
+                GridManager.Instance.Player1Name.Content = $"{data.Player1Name}: {data.ScoreP1}";
+                GridManager.Instance.Player2Name.Content = $"{data.Player2Name}: {data.ScoreP2}";
                 return GridFactory.Instance.RestoreGameGrid(data.Grid);
             }
             catch (Exception e)

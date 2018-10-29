@@ -31,7 +31,7 @@ namespace MemoryProjectTest
             "pink", "pinkPair"
         };
 
-        private string[] PlayerNames =
+        private static string[] PlayerNames =
         {
             "Edgar", "AnotherFoxGuy"
         };
@@ -44,7 +44,7 @@ namespace MemoryProjectTest
             return Application.Launch(Path.Combine(TestContext.CurrentContext.TestDirectory, @"MemoryProject.exe"));
         }
 
-        private static Window CreateMainGameWindow(Application application = null, string[] names = null)
+        private static Window CreateMainGameWindow(Application application = null)
         {
             if (application == null)
                 application = StartApplication();
@@ -53,13 +53,8 @@ namespace MemoryProjectTest
             var nGButton = mainWindow.Get<Button>("NewGame");
             nGButton.Click();
             var newGameWindow = application.GetWindow("New Game", InitializeOption.NoCache);
-
-            if (names != null)
-            {
-                newGameWindow.Get<TextBox>("Player1NameInput").BulkText = names[0];
-                newGameWindow.Get<TextBox>("Player2NameInput").BulkText = names[1];
-            }
-
+            newGameWindow.Get<TextBox>("Player1NameInput").Text = PlayerNames[0];
+            newGameWindow.Get<TextBox>("Player2NameInput").Text = PlayerNames[1];
             var newGameGridButton = newGameWindow.Get<Button>("4X4Button");
             newGameGridButton.Click();
             return application.GetWindow("Name The Game");
@@ -73,10 +68,10 @@ namespace MemoryProjectTest
         [Test, Order(1)]
         public void NewGame()
         {
-            var mainGameWindow = CreateMainGameWindow(null, PlayerNames);
+            var mainGameWindow = CreateMainGameWindow();
 
-            StringAssert.AreEqualIgnoringCase(PlayerNames[0], mainGameWindow.Get<Label>("Player1Name").Text);
-            StringAssert.AreEqualIgnoringCase(PlayerNames[1], mainGameWindow.Get<Label>("Player2Name").Text);
+            StringAssert.AreEqualIgnoringCase($"{PlayerNames[0]}: 0", mainGameWindow.Get<Label>("Player1Name").Text);
+            StringAssert.AreEqualIgnoringCase($"{PlayerNames[1]}: 0", mainGameWindow.Get<Label>("Player2Name").Text);
 
             mainGameWindow.Close();
         }
@@ -119,7 +114,8 @@ namespace MemoryProjectTest
                 mainGameWindow.Get<Image>(cardName).Click();
             }
 
-            StringAssert.AreEqualIgnoringCase("Score: 8", mainGameWindow.Get<Label>("Score1").Text);
+            StringAssert.AreEqualIgnoringCase($"{PlayerNames[0]}: 8", mainGameWindow.Get<Label>("Player1Name").Text);
+            StringAssert.AreEqualIgnoringCase($"{PlayerNames[1]}: 0", mainGameWindow.Get<Label>("Player2Name").Text);
             mainGameWindow.Close();
         }
 
@@ -146,7 +142,7 @@ namespace MemoryProjectTest
         [Test, Order(7)]
         public void SaveGame()
         {
-            var mainGameWindow = CreateMainGameWindow(null, PlayerNames);
+            var mainGameWindow = CreateMainGameWindow();
 
             for (var i = 0; i < CardNames.Length / 2; i++)
             {
@@ -175,7 +171,9 @@ namespace MemoryProjectTest
                 mainGameWindow.Get<Image>(cardName).Click();
             }
 
-            StringAssert.AreEqualIgnoringCase("Score: 0", mainGameWindow.Get<Label>("Score1").Text);
+            StringAssert.AreEqualIgnoringCase($"{PlayerNames[0]}: 0", mainGameWindow.Get<Label>("Player1Name").Text);
+            StringAssert.AreEqualIgnoringCase($"{PlayerNames[1]}: 0", mainGameWindow.Get<Label>("Player2Name").Text);
+
             mainGameWindow.Close();
         }
 
@@ -189,8 +187,8 @@ namespace MemoryProjectTest
             var messageBox = mainGameWindow.MessageBox("Game Load");
             messageBox.Get<Button>(SearchCriteria.ByText("OK")).Click();
 
-            StringAssert.AreEqualIgnoringCase(PlayerNames[0], mainGameWindow.Get<Label>("Player1Name").Text);
-            StringAssert.AreEqualIgnoringCase(PlayerNames[1], mainGameWindow.Get<Label>("Player2Name").Text);
+            StringAssert.AreEqualIgnoringCase($"{PlayerNames[0]}: 4", mainGameWindow.Get<Label>("Player1Name").Text);
+            StringAssert.AreEqualIgnoringCase($"{PlayerNames[1]}: 0", mainGameWindow.Get<Label>("Player2Name").Text);
 
             for (var i = CardNames.Length / 2; i < CardNames.Length; i++)
             {
@@ -198,7 +196,9 @@ namespace MemoryProjectTest
                 mainGameWindow.Get<Image>(cardName).Click();
             }
 
-            StringAssert.AreEqualIgnoringCase("Score: 8", mainGameWindow.Get<Label>("Score1").Text);
+            StringAssert.AreEqualIgnoringCase($"{PlayerNames[0]}: 8", mainGameWindow.Get<Label>("Player1Name").Text);
+            StringAssert.AreEqualIgnoringCase($"{PlayerNames[1]}: 0", mainGameWindow.Get<Label>("Player2Name").Text);
+            
             mainGameWindow.Close();
         }
 

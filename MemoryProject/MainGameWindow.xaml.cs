@@ -9,14 +9,12 @@ namespace MemoryProject
     public partial class MainGameWindow
     {
         public MainGameWindow()
-
         {
             InitializeComponent();
 
             GridManager.Instance.Player1Name = Player1Name;
             GridManager.Instance.Player2Name = Player2Name;
             GridManager.Instance.LiveGameGrid = LiveGameGrid;
-            GridManager.Instance.ScoreLabel = Score1;
         }
 
 
@@ -24,12 +22,11 @@ namespace MemoryProject
         {
             GridManager.Instance.Clear();
             GridManager.Instance.LiveGameGrid = null;
-            GridManager.Instance.ScoreLabel = null;
+            
 
             var mainWindow = new MainMenuWindow();
             mainWindow.Show();
             Close();
-
         }
 
         private void SaveGame(object sender, RoutedEventArgs e)
