@@ -36,9 +36,9 @@ namespace MemoryProject
 
         private string _themeName;
 
-        public void NewGrid(int size)
+        public void NewGrid(int x, int y)
         {
-            LiveGame.Grid = GridFactory.Instance.GenerateGameGrid(size, size);
+            LiveGame.Grid = GridFactory.Instance.GenerateGameGrid(x, y);
             _playerTurn = Turn.Player1;
             Player1Name.Foreground = _green;
             Player2Name.Foreground = _red;

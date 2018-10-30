@@ -14,8 +14,24 @@ namespace MemoryProject
         private void OnButtonClick(object sender, RoutedEventArgs e)
         {
             GridManager.Instance.SetPlayerNames(Player1NameInput.Text, Player2NameInput.Text);
-            var size = int.Parse(((Button) sender).Tag.ToString());
-            GridManager.Instance.NewGrid(size);
+
+
+			switch (((Button)sender).Name.ToString())
+			{
+				case "X4Y4":
+					GridManager.Instance.NewGrid(4, 4);
+					break;
+				case "X4Y5":
+					GridManager.Instance.NewGrid(4, 5);
+					break;
+				case "X6Y6":
+					GridManager.Instance.NewGrid(6, 6);
+					break;
+				case "X5Y8":
+					GridManager.Instance.NewGrid(5, 8);
+					break;
+			}
+           
             Close();
         }
         

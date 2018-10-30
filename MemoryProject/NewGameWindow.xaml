@@ -5,40 +5,35 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:MemoryProject"
         mc:Ignorable="d"
-        Title="New Game" Height="366.517" Width="514.459">
+        ResizeMode="NoResize"
+        Title="New Game" Height="221.534" Width="363.677">
     <StackPanel Margin="10" VerticalAlignment="Top">
 
 
-        <DockPanel VerticalAlignment="Center" Margin="10" RenderTransformOrigin="0.494,0.157">
-            <Button AutomationProperties.AutomationId="4X4Button" Content="4X4" Tag="4" HorizontalAlignment="Left"
+        <Grid VerticalAlignment="Center" Margin="10" >
+            <Button AutomationProperties.AutomationId="4X4Button" Content="4X4" Name="X4Y4"  HorizontalAlignment="Left"
                     Margin="10" VerticalAlignment="Top" Width="50" Height="50" Click="OnButtonClick" />
-            <Button AutomationProperties.AutomationId="5X5Button" Content="5X5" Tag="5" HorizontalAlignment="Right"
+            <Button AutomationProperties.AutomationId="5X5Button" Content="4X5" Name="X4Y5" HorizontalAlignment="Center"
                     Margin="10" VerticalAlignment="Top" Width="50" Height="50" Click="OnButtonClick" />
-
-        </DockPanel>
-
-
-        <DockPanel VerticalAlignment="Center" Margin="10">
-            <Button AutomationProperties.AutomationId="6X6Button" Content="6X6" Tag="6" HorizontalAlignment="Left"
+            <Button AutomationProperties.AutomationId="6X6Button" Content="6X6" Name="X6Y6" HorizontalAlignment="Right"
                     Margin="10" VerticalAlignment="Top" Width="50" Height="50" Click="OnButtonClick" />
-            <Button AutomationProperties.AutomationId="7X7Button" Content="7X7" Tag="7" HorizontalAlignment="Right"
-                    Margin="10" VerticalAlignment="Top" Width="50" Height="50" Click="OnButtonClick" />
-        </DockPanel>
+        </Grid>
 
         <DockPanel VerticalAlignment="Center" Margin="10">
-            <ComboBox Name="ThemeSelector" SelectionChanged="SelectTheme">
+            <Label Content="Thema's: " Height="25" Width="80" />
+            <ComboBox Name="ThemeSelector" SelectionChanged="SelectTheme" Width="236">
                 <ComboBoxItem Name="Instrumenten" IsSelected="True">Instrumenten</ComboBoxItem>
                 <ComboBoxItem Name="Kids">Kids</ComboBoxItem>
                 <ComboBoxItem Name="Placeholder">Placeholder</ComboBoxItem>
             </ComboBox>
         </DockPanel>
 
-        <StackPanel Orientation="Horizontal">
+        <DockPanel>
             <Label Name="Player1Name" Content="Player1" Height="25" Width="50" />
             <TextBox Name="Player1NameInput" Text="" Width="100" Height="20" Margin="5" TextChanged="NameUpdated" />
             <Label Name="Player2Name" Content="Player2" Height="25" Width="50" />
-            <TextBox Name="Player2NameInput" Text="" Width="100" Height="20" Margin="5" TextChanged="NameUpdated" />
-        </StackPanel>
+            <TextBox x:Name="Player2NameInput" Text="" Width="100" Height="20" Margin="5" TextChanged="NameUpdated" />
+        </DockPanel>
 
 
     </StackPanel>
