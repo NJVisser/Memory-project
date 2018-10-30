@@ -30,6 +30,12 @@ namespace MemoryProject.Data
         public string BackImageName;
     }
 
+    public class HighScore
+    {
+        public string PlayerName;
+        public int Score;
+    }
+
     public enum Turn
     {
         Player1,

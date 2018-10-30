@@ -1,5 +1,7 @@
+using System.Linq;
 using System.Windows;
 using AGC.Tools;
+
 
 namespace MemoryProject
 {
@@ -9,6 +11,10 @@ namespace MemoryProject
         {
             InitializeComponent();
             AGCTools.SetupLogger();
+
+            var hsl = SaveGameManager.Instance.GetHighScoreList();
+            hsl?.OrderByDescending(hsi => hsi.Score).ToList()
+                .ForEach(e => HighScoreList.Items.Add($"{e.PlayerName}: {e.Score}"));
         }
 
         private void NewGame(object sender, RoutedEventArgs routedEventArgs)

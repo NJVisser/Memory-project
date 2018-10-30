@@ -115,9 +115,14 @@ namespace MemoryProjectTest
             {
                 mainGameWindow.Get<Image>(cardName).Click();
             }
+            
+            
+            var messageBox = mainGameWindow.MessageBox("Results");
+            messageBox.Get<Button>(SearchCriteria.ByText("OK")).Click();
 
             StringAssert.AreEqualIgnoringCase($"{PlayerNames[0]}: 8", mainGameWindow.Get<Label>("Player1Name").Text);
             StringAssert.AreEqualIgnoringCase($"{PlayerNames[1]}: 0", mainGameWindow.Get<Label>("Player2Name").Text);
+            
             mainGameWindow.Close();
         }
 
@@ -156,6 +161,7 @@ namespace MemoryProjectTest
 
             var messageBox = mainGameWindow.MessageBox("Game Save");
             messageBox.Get<Button>(SearchCriteria.ByText("OK")).Click();
+            
             mainGameWindow.Close();
         }
 
@@ -186,8 +192,8 @@ namespace MemoryProjectTest
 
             mainGameWindow.Get<Button>("LoadGame").Click();
 
-            var messageBox = mainGameWindow.MessageBox("Game Load");
-            messageBox.Get<Button>(SearchCriteria.ByText("OK")).Click();
+            var messageLoadBox = mainGameWindow.MessageBox("Game Load");
+            messageLoadBox.Get<Button>(SearchCriteria.ByText("OK")).Click();
 
             StringAssert.AreEqualIgnoringCase($"{PlayerNames[0]}: 4", mainGameWindow.Get<Label>("Player1Name").Text);
             StringAssert.AreEqualIgnoringCase($"{PlayerNames[1]}: 0", mainGameWindow.Get<Label>("Player2Name").Text);
@@ -197,6 +203,9 @@ namespace MemoryProjectTest
                 var cardName = CardNames[i];
                 mainGameWindow.Get<Image>(cardName).Click();
             }
+            
+            var messageBox = mainGameWindow.MessageBox("Results");
+            messageBox.Get<Button>(SearchCriteria.ByText("OK")).Click();
 
             StringAssert.AreEqualIgnoringCase($"{PlayerNames[0]}: 8", mainGameWindow.Get<Label>("Player1Name").Text);
             StringAssert.AreEqualIgnoringCase($"{PlayerNames[1]}: 0", mainGameWindow.Get<Label>("Player2Name").Text);

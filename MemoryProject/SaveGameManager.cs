@@ -1,6 +1,6 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
-using System.Windows;
 using AGC.Tools;
 using MemoryProject.Data;
 using MessagePack;
@@ -71,6 +71,40 @@ namespace MemoryProject
                 return false;
             }
         }
+        
+        internal List<HighScore> GetHighScoreList()
+        {
+            try
+            {
+                var highScores = $@"{AGCTools.GetGameFolder()}\highScores";
+                if (!File.Exists(highScores)) return null;
+                var hsd = File.ReadAllBytes(highScores);
+                return MessagePackSerializer.Deserialize<List<HighScore>>(hsd);
+            }
+            catch (Exception e)
+            {
+                AGCTools.LogException(e);
+                return null;
+            }
+        }
+
+
+        internal void SaveToHighScoreList(HighScore s)
+        {
+           
+            try
+            {
+                var hsl = GetHighScoreList() ?? new List<HighScore>();
+                hsl.Add(s);
+                var save = MessagePackSerializer.Serialize(hsl);
+                File.WriteAllBytes($@"{AGCTools.GetGameFolder()}\highScores", save);
+            }
+            catch (Exception e)
+            {
+                AGCTools.LogException(e);
+            }
+        }
+
 
         #region Singleton
 

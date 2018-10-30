@@ -14,7 +14,7 @@
 		        Click="Settings" AutomationProperties.AutomationId="Settings" />
 		<Button Content="Exit" HorizontalAlignment="Left" Margin="30,115,0,0" VerticalAlignment="Top" Width="100" Height="30" 
 		        Click="Exit" AutomationProperties.AutomationId="Exit" />
-		<ListBox HorizontalAlignment="Left" Height="359" Margin="179,25,0,0" VerticalAlignment="Top" Width="400"/>
+		<ListBox Name="HighScoreList" HorizontalAlignment="Left" Height="359" Margin="179,25,0,0" VerticalAlignment="Top" Width="400"/>
 
 	</Grid>
 </Window>

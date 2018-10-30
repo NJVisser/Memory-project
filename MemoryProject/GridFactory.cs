@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
@@ -97,7 +96,7 @@ namespace MemoryProject
                         backgroundImage.MouseDown += GridManager.Instance.ClickCard;
 
                     Grid.SetColumn(backgroundImage, card.Value.Column);
-                    Grid.SetRow(backgroundImage, card.Value.Column);
+                    Grid.SetRow(backgroundImage, card.Value.Row);
                     GridManager.Instance.LiveGameGrid.Children.Add(backgroundImage);
                 }
 

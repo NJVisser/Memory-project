@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -7,7 +8,6 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Threading;
 using AGC.Tools;
 using MemoryProject.Data;
 
@@ -18,9 +18,9 @@ namespace MemoryProject
         private Card _check;
         private readonly Image[] _clickedCards = new Image[2];
         private bool _isBusy;
+        private Turn _playerTurn;
 
         internal SingleGame LiveGame { get; set; } = new SingleGame {Grid = new Dictionary<string, Card>()};
-
         internal UniformGrid LiveGameGrid { get; set; }
 
         internal Label Player1Name { get; set; }
@@ -32,9 +32,6 @@ namespace MemoryProject
         private readonly SolidColorBrush _red =
             new SolidColorBrush(Color.FromRgb(Byte.MaxValue, Byte.MinValue, Byte.MinValue));
 
-        private Turn _playerTurn;
-
-        private string _themeName;
 
         public void NewGrid(int x, int y)
         {
@@ -42,7 +39,7 @@ namespace MemoryProject
             _playerTurn = Turn.Player1;
             Player1Name.Foreground = _green;
             Player2Name.Foreground = _red;
-            _themeName = GridFactory.Instance.LiveTheme.ThemeName;
+            LiveGame.ThemeName = GridFactory.Instance.LiveTheme.ThemeName;
         }
 
         /// <summary>
@@ -56,8 +53,8 @@ namespace MemoryProject
             var card = LiveGame.Grid[img.Name];
             img.Source =
                 new BitmapImage(
-                    new Uri($"{AppDomain.CurrentDomain.BaseDirectory}/Images/{_themeName}/{card.Name}.png"));
-            if (card.IsGone)
+                    new Uri($"{AppDomain.CurrentDomain.BaseDirectory}/Images/{LiveGame.ThemeName}/{card.Name}.png"));
+            if (card.IsGone || card.IsClicked)
                 return;
 
             card.IsClicked = true;
@@ -77,9 +74,22 @@ namespace MemoryProject
                 card.IsClicked = _check.IsClicked = false;
                 card.IsGone = true;
                 _check.IsGone = true;
+
+                var x = LiveGame.Grid.Count(pair => pair.Value.IsGone == false);
+
+                if (x <= 0)
+                {
+                    MessageBox.Show(
+                        $"{LiveGame.Player1Name}: {LiveGame.ScoreP1}\n{LiveGame.Player2Name}: {LiveGame.ScoreP2}", "Results");
+                    SaveGameManager.Instance.SaveToHighScoreList(new HighScore
+                        {PlayerName = LiveGame.Player1Name, Score = LiveGame.ScoreP1});
+                    if (!LiveGame.SinglePlayer)
+                        SaveGameManager.Instance.SaveToHighScoreList(new HighScore
+                            {PlayerName = LiveGame.Player2Name, Score = LiveGame.ScoreP2});
+                }
             }
 
-            else //deselect incorrect cards so they flip back adn Flip image back to card back
+            else //Deselect incorrect cards so they flip back and Flip image back to the card back
             {
                 SwitchPlayer();
 
@@ -150,7 +160,8 @@ namespace MemoryProject
                     foreach (var i in img)
                     {
                         i.Source = new BitmapImage(
-                            new Uri($"{AppDomain.CurrentDomain.BaseDirectory}/Images/{_themeName}/{bgimg}.png"));
+                            new Uri(
+                                $"{AppDomain.CurrentDomain.BaseDirectory}/Images/{LiveGame.ThemeName}/{bgimg}.png"));
                     }
 
                     Mouse.OverrideCursor = null;
