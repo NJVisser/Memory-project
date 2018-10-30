@@ -8,6 +8,7 @@ using TestStack.White;
 using TestStack.White.Factory;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
+using TestStack.White.UIItems.ListBoxItems;
 using TestStack.White.UIItems.WindowItems;
 
 namespace MemoryProjectTest
@@ -53,6 +54,7 @@ namespace MemoryProjectTest
             var nGButton = mainWindow.Get<Button>("NewGame");
             nGButton.Click();
             var newGameWindow = application.GetWindow("New Game", InitializeOption.NoCache);
+            newGameWindow.Get<ComboBox>("ThemeSelector").Select(2);
             newGameWindow.Get<TextBox>("Player1NameInput").Text = PlayerNames[0];
             newGameWindow.Get<TextBox>("Player2NameInput").Text = PlayerNames[1];
             var newGameGridButton = newGameWindow.Get<Button>("4X4Button");

@@ -34,12 +34,15 @@ namespace MemoryProject
 
         private Turn _playerTurn;
 
+        private string _themeName;
+
         public void NewGrid(int size)
         {
             LiveGame.Grid = GridFactory.Instance.GenerateGameGrid(size, size);
             _playerTurn = Turn.Player1;
             Player1Name.Foreground = _green;
             Player2Name.Foreground = _red;
+            _themeName = GridFactory.Instance.LiveTheme.ThemeName;
         }
 
         /// <summary>
@@ -51,8 +54,9 @@ namespace MemoryProject
 
             var img = (Image) sender;
             var card = LiveGame.Grid[img.Name];
-            img.Source = new BitmapImage(new Uri($"Images/Placeholders/{card.Name}.png", UriKind.Relative));
-
+            img.Source =
+                new BitmapImage(
+                    new Uri($"{AppDomain.CurrentDomain.BaseDirectory}/Images/{_themeName}/{card.Name}.png"));
             if (card.IsGone)
                 return;
 
@@ -142,10 +146,11 @@ namespace MemoryProject
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    var bgimg = GridFactory.Instance.PlaceholderTheme.BackImageName;
+                    var bgimg = GridFactory.Instance.LiveTheme.BackImageName;
                     foreach (var i in img)
                     {
-                        i.Source = new BitmapImage(new Uri($"Images/Placeholders/{bgimg}.png", UriKind.Relative));
+                        i.Source = new BitmapImage(
+                            new Uri($"{AppDomain.CurrentDomain.BaseDirectory}/Images/{_themeName}/{bgimg}.png"));
                     }
 
                     Mouse.OverrideCursor = null;

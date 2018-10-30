@@ -5,6 +5,7 @@ namespace MemoryProject
 {
     public partial class NewGameWindow : Window
     {
+        
         public NewGameWindow()
         {
             InitializeComponent();
@@ -17,8 +18,7 @@ namespace MemoryProject
             GridManager.Instance.NewGrid(size);
             Close();
         }
-
-
+        
         private void NameUpdated(object sender, TextChangedEventArgs e)
         {
             var textBox = (TextBox) sender;
@@ -27,6 +27,12 @@ namespace MemoryProject
                 Player1Name.Content = textBox.Text;
             else
                 Player2Name.Content = textBox.Text;
+        }
+
+        private void SelectTheme(object sender, SelectionChangedEventArgs e)
+        {
+            var x = (ComboBoxItem)ThemeSelector.SelectedValue;
+            GridFactory.Instance.SetTheme(x.Name);
         }
     }
 }

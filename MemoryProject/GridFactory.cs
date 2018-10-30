@@ -19,9 +19,9 @@ namespace MemoryProject
         /// <summary>
         /// supports a game upto 20 Pairs a.k.a 40 Cards
         /// </summary>
-        public readonly Theme PlaceholderTheme =
+        public Theme LiveTheme =
             JsonConvert.DeserializeObject<Theme>(
-                File.ReadAllText($@"{AppDomain.CurrentDomain.BaseDirectory}\Themes\PlaceholderTheme.json"));
+                File.ReadAllText($@"{AppDomain.CurrentDomain.BaseDirectory}/Themes/Placeholder.json"));
 
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace MemoryProject
             var gameGrid = new Dictionary<string, Card>();
             var cardsNeeded = cols * rows;
             var tmpCardsList = new List<Card>();
-            var cardsUsedList = PlaceholderTheme.Cards.Take(cardsNeeded / 2).ToList();
+            var cardsUsedList = LiveTheme.Cards.Take(cardsNeeded / 2).ToList();
             foreach (var c in cardsUsedList)
             {
                 tmpCardsList.Add(new Card {Name = c.Name, ID = c.Name});
@@ -50,8 +50,8 @@ namespace MemoryProject
 
                     var backgroundImage = new Image
                     {
-                        Source = new BitmapImage(new Uri($"Images/Placeholders/{PlaceholderTheme.BackImageName}.png",
-                            UriKind.Relative)),
+                        Source = new BitmapImage(new Uri(
+                            $"{AppDomain.CurrentDomain.BaseDirectory}/Images/{LiveTheme.ThemeName}/{LiveTheme.BackImageName}.png")),
                         Cursor = Cursors.Hand,
                         Name = RCard.ID
                     };
@@ -70,6 +70,13 @@ namespace MemoryProject
         }
 
 
+        internal void SetTheme(string Name)
+        {
+            LiveTheme =
+                JsonConvert.DeserializeObject<Theme>(
+                    File.ReadAllText($@"{AppDomain.CurrentDomain.BaseDirectory}/Themes/{Name}.json"));
+        }
+
         internal bool RestoreGameGrid(Dictionary<string, Card> savedGrid)
         {
             try
@@ -79,10 +86,10 @@ namespace MemoryProject
                     var backgroundImage = new Image
                     {
                         Source = card.Value.IsGone
-                            ? new BitmapImage(new Uri($"Images/Placeholders/{card.Value.Name}.png",
-                                UriKind.Relative))
-                            : new BitmapImage(new Uri($"Images/Placeholders/{PlaceholderTheme.BackImageName}.png",
-                                UriKind.Relative)),
+                            ? new BitmapImage(new Uri(
+                                $"{AppDomain.CurrentDomain.BaseDirectory}/Images/{LiveTheme.ThemeName}/{card.Value.Name}.png"))
+                            : new BitmapImage(new Uri(
+                                $"{AppDomain.CurrentDomain.BaseDirectory}/Images/{LiveTheme.ThemeName}/{LiveTheme.BackImageName}.png")),
                         Cursor = Cursors.Hand,
                         Name = card.Key
                     };

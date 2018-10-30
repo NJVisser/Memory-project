@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -105,38 +105,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Placeholders\blue.png" />
-    <Resource Include="Images\Placeholders\brown.png" />
-    <Resource Include="Images\Placeholders\green.png" />
-    <Resource Include="Images\Placeholders\orange.png" />
-    <Resource Include="Images\Placeholders\pink.png" />
-    <Resource Include="Images\Placeholders\purple.png" />
-    <Resource Include="Images\Placeholders\red.png" />
-    <Resource Include="Images\Placeholders\yellow.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Placeholders\Cardback.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Placeholders\blueGrey.png" />
-    <Resource Include="Images\Placeholders\darkRed.png" />
-    <Resource Include="Images\Placeholders\gold.png" />
-    <Resource Include="Images\Placeholders\grey.png" />
-    <Resource Include="Images\Placeholders\lavender.png" />
-    <Resource Include="Images\Placeholders\lightGreen.png" />
-    <Resource Include="Images\Placeholders\lightGrey.png" />
-    <Resource Include="Images\Placeholders\lightTurquoise.png" />
-    <Resource Include="Images\Placeholders\lightYellow.png" />
-    <Resource Include="Images\Placeholders\lime.png" />
-    <Resource Include="Images\Placeholders\turquoise.png" />
-    <Resource Include="Images\Placeholders\white.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Themes\PlaceholderTheme.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
