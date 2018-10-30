@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:MemoryProject"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="New Game" Height="221.534" Width="363.677">
+        Title="New Game" Height="221.534" Width="363.677" Background="#36373E">
+
+
+
     <StackPanel Margin="10" VerticalAlignment="Top">
 
 
@@ -20,7 +23,7 @@
         </Grid>
 
         <DockPanel VerticalAlignment="Center" Margin="10">
-            <Label Content="Thema's: " Height="25" Width="80" />
+            <Label Content="Thema's: " Height="25" Width="80" Foreground="White"/>
             <ComboBox Name="ThemeSelector" SelectionChanged="SelectTheme" Width="236">
                 <ComboBoxItem Name="Instrumenten" IsSelected="True">Instrumenten</ComboBoxItem>
                 <ComboBoxItem Name="Kids">Kids</ComboBoxItem>
@@ -29,12 +32,13 @@
         </DockPanel>
 
         <DockPanel>
-            <Label Name="Player1Name" Content="Player1" Height="25" Width="50" />
+            <Label Name="Player1Name" Content="Player1" Height="25" Width="50" Foreground="White"/>
             <TextBox Name="Player1NameInput" Text="" Width="100" Height="20" Margin="5" TextChanged="NameUpdated" />
-            <Label Name="Player2Name" Content="Player2" Height="25" Width="50" />
+            <Label Name="Player2Name" Content="Player2" Height="25" Width="50" Foreground="White"/>
             <TextBox x:Name="Player2NameInput" Text="" Width="100" Height="20" Margin="5" TextChanged="NameUpdated" />
         </DockPanel>
 
 
     </StackPanel>
+
 </Window>

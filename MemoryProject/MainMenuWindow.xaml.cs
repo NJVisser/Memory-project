@@ -28,6 +28,8 @@ namespace MemoryProject
         private void Settings(object sender, RoutedEventArgs routedEventArgs)
         {
             // TODO: add settings tab
+            Endscreen win = new Endscreen(this);
+            win.Show();
         }
 
         private void Exit(object sender, RoutedEventArgs routedEventArgs)

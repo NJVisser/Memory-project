@@ -4,10 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Name The Game" Height="450" Width="800">
+        Title="Name The Game" Height="450" Width="800" Background="#36373E">
     <Grid>
-        <Label Name="Player1Name" Content="Player1" Width="150" Height="30" Margin="50,5" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Label Name="Player2Name" Content="Player2" Width="150" Height="30" Margin="250,5" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <Label Name="Player1Name" Content="Player1" Width="150" Height="30" Margin="50,5" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White"/>
+        <Label Name="Player2Name" Content="Player2" Width="150" Height="30" Margin="250,5" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White"/>
         <Button Content="New Game" HorizontalAlignment="Right" Margin="230,5" VerticalAlignment="Top" Width="100" Height="30" 
                 Click="RestartGame" AutomationProperties.AutomationId="RestartGame" />
         <Button Content="Save Game" HorizontalAlignment="Right" Margin="120,5" VerticalAlignment="Top" Width="100" Height="30" 
