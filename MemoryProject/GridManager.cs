@@ -95,7 +95,7 @@ namespace MemoryProject
                     if (!LiveGame.SinglePlayer)
                         SaveGameManager.Instance.SaveToHighScoreList(new HighScore
                             {PlayerName = LiveGame.Player2Name, Score = LiveGame.ScoreP2});
-                    Endscreen win = new Endscreen(this);
+                    Endscreen win = new Endscreen();
                     win.Show();
                 }
             }
