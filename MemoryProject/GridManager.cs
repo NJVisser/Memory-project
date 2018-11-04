@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Media;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using AGC.Tools;
 using MemoryProject.Data;
 
@@ -26,12 +28,18 @@ namespace MemoryProject
 
         internal Label Player1Name { get; set; }
         internal Label Player2Name { get; set; }
+        internal TextBlock ClockBlock { private get; set; }
 
         private readonly SolidColorBrush _green =
             new SolidColorBrush(Color.FromRgb(Byte.MinValue, Byte.MaxValue, Byte.MinValue));
 
         private readonly SolidColorBrush _red =
             new SolidColorBrush(Color.FromRgb(Byte.MaxValue, Byte.MinValue, Byte.MinValue));
+
+
+        DispatcherTimer dt = new DispatcherTimer();
+        Stopwatch sw = new Stopwatch();
+        string currentTime = string.Empty;
 
 
         public void NewGrid(int x, int y)
@@ -41,6 +49,14 @@ namespace MemoryProject
             Player1Name.Foreground = _green;
             Player2Name.Foreground = _red;
             LiveGame.ThemeName = GridFactory.Instance.LiveTheme.ThemeName;
+
+            sw.Reset();
+
+            dt.Tick += new EventHandler(dt_Tick);
+            dt.Interval = new TimeSpan(0, 0, 0, 0, 1);
+
+            sw.Start();
+            dt.Start();
         }
 
         /// <summary>
@@ -84,12 +100,14 @@ namespace MemoryProject
                 {
                     MessageBox.Show("Error Message - " + ex.Message);
                 }
+
                 var x = LiveGame.Grid.Count(pair => pair.Value.IsGone == false);
 
                 if (x <= 0)
                 {
-                    MessageBox.Show(
-                        $"{LiveGame.Player1Name}: {LiveGame.ScoreP1}\n{LiveGame.Player2Name}: {LiveGame.ScoreP2}", "Results");
+                    if (sw.IsRunning)
+                        sw.Stop();
+
                     SaveGameManager.Instance.SaveToHighScoreList(new HighScore
                         {PlayerName = LiveGame.Player1Name, Score = LiveGame.ScoreP1});
                     if (!LiveGame.SinglePlayer)
@@ -118,6 +136,7 @@ namespace MemoryProject
                 {
                     MessageBox.Show("Error Message - " + ex.Message);
                 }
+
                 Task.Delay(TimeSpan.FromSeconds(1)).ContinueWith(t => FlipCard(_clickedCards));
             }
 
@@ -189,6 +208,17 @@ namespace MemoryProject
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
+            }
+        }
+
+
+        private void dt_Tick(object sender, EventArgs e)
+        {
+            if (sw.IsRunning)
+            {
+                TimeSpan ts = sw.Elapsed;
+                currentTime = $"{ts.Minutes:00}:{ts.Seconds:00}:{ts.Milliseconds / 10:00}";
+                ClockBlock.Text = currentTime;
             }
         }
 

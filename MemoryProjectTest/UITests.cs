@@ -94,6 +94,10 @@ namespace MemoryProjectTest
             var application = StartApplication();
             var startUpMainWindow = application.GetWindow("Name The Game Main Menu", InitializeOption.NoCache);
             startUpMainWindow.Get<Button>("Settings").Click();
+
+            var Endscreen = application.GetWindow("Endscreen", InitializeOption.NoCache);
+            Endscreen.Close();
+
             startUpMainWindow.Close();
         }
 
@@ -109,20 +113,21 @@ namespace MemoryProjectTest
         [Test, Order(5)]
         public void PlayGame()
         {
-            var mainGameWindow = CreateMainGameWindow();
+            var application = StartApplication();
+            var mainGameWindow = CreateMainGameWindow(application);
 
             foreach (var cardName in CardNames)
             {
                 mainGameWindow.Get<Image>(cardName).Click();
             }
-            
-            
-            var messageBox = mainGameWindow.MessageBox("Results");
-            messageBox.Get<Button>(SearchCriteria.ByText("OK")).Click();
+
+
+            var Endscreen = application.GetWindow("Endscreen", InitializeOption.NoCache);
+            Endscreen.Close();
 
             StringAssert.AreEqualIgnoringCase($"{PlayerNames[0]}: 8", mainGameWindow.Get<Label>("Player1Name").Text);
             StringAssert.AreEqualIgnoringCase($"{PlayerNames[1]}: 0", mainGameWindow.Get<Label>("Player2Name").Text);
-            
+
             mainGameWindow.Close();
         }
 
@@ -161,7 +166,7 @@ namespace MemoryProjectTest
 
             var messageBox = mainGameWindow.MessageBox("Game Save");
             messageBox.Get<Button>(SearchCriteria.ByText("OK")).Click();
-            
+
             mainGameWindow.Close();
         }
 
@@ -188,7 +193,8 @@ namespace MemoryProjectTest
         [Test, Order(9)]
         public void LoadGame()
         {
-            var mainGameWindow = CreateMainGameWindow();
+            var application = StartApplication();
+            var mainGameWindow = CreateMainGameWindow(application);
 
             mainGameWindow.Get<Button>("LoadGame").Click();
 
@@ -203,13 +209,13 @@ namespace MemoryProjectTest
                 var cardName = CardNames[i];
                 mainGameWindow.Get<Image>(cardName).Click();
             }
-            
-            var messageBox = mainGameWindow.MessageBox("Results");
-            messageBox.Get<Button>(SearchCriteria.ByText("OK")).Click();
+
+            var Endscreen = application.GetWindow("Endscreen", InitializeOption.NoCache);
+            Endscreen.Close();
 
             StringAssert.AreEqualIgnoringCase($"{PlayerNames[0]}: 8", mainGameWindow.Get<Label>("Player1Name").Text);
             StringAssert.AreEqualIgnoringCase($"{PlayerNames[1]}: 0", mainGameWindow.Get<Label>("Player2Name").Text);
-            
+
             mainGameWindow.Close();
         }
 
