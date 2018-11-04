@@ -15,6 +15,7 @@ namespace MemoryProject
             GridManager.Instance.Player1Name = Player1Name;
             GridManager.Instance.Player2Name = Player2Name;
             GridManager.Instance.LiveGameGrid = LiveGameGrid;
+            GridManager.Instance.ClockBlock = clocktxtblock;
         }
 
 
