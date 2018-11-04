@@ -65,6 +65,11 @@
     <Compile Include="Endscreen.xaml.cs">
       <DependentUpon>Endscreen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="SaveGameManager.cs" />
     <Compile Include="AGCTools.cs" />
     <Page Include="Endscreen.xaml">
@@ -99,11 +104,6 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -112,6 +112,150 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\accordion.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\banjo.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BassGuitar.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bones.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bongo.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Djembe.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\drums.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Gong.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\harmonica.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\harp.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\keyboard.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kornetto.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\luit.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mondharmonica.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\piano.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sax.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\scotishpipes.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\transverser.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\triangle.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\viool.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Xylophone.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\abu.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BabyBoss.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bob.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Calimero.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cars.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CookieMonster.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Creeper.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DocMcStuffins.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DonaldDuck.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Dora.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Dory.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Dwerg.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Gargamel.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\garlfield.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\heli.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Manny.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Mickey.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Panda.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pikachu.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Scrat.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Simba.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SpongeBob.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\teletubbie.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tigger.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WonderPets.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Wrong.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Correct.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

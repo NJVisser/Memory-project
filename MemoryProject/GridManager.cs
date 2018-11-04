@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -74,7 +75,15 @@ namespace MemoryProject
                 card.IsClicked = _check.IsClicked = false;
                 card.IsGone = true;
                 _check.IsGone = true;
-
+                try
+                {
+                    SoundPlayer player = new SoundPlayer(Properties.Resources.Correct);
+                    player.Play();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error Message - " + ex.Message);
+                }
                 var x = LiveGame.Grid.Count(pair => pair.Value.IsGone == false);
 
                 if (x <= 0)
@@ -100,7 +109,15 @@ namespace MemoryProject
                 card.IsClicked = false;
                 _check.IsClicked = false;
                 _clickedCards[1] = img;
-
+                try
+                {
+                    SoundPlayer player = new SoundPlayer(Properties.Resources.Wrong);
+                    player.Play();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error Message - " + ex.Message);
+                }
                 Task.Delay(TimeSpan.FromSeconds(1)).ContinueWith(t => FlipCard(_clickedCards));
             }
 
