@@ -28,7 +28,7 @@ namespace MemoryProject
         private void Settings(object sender, RoutedEventArgs routedEventArgs)
         {
             // TODO: add settings tab
-            Endscreen win = new Endscreen(this);
+            Endscreen win = new Endscreen();
             win.Show();
         }
 

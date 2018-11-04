@@ -19,19 +19,18 @@ namespace MemoryProject
     /// </summary>
     public partial class Endscreen : Window
     {
-        private MainMenuWindow mainMenuWindow;
 
-        public Endscreen(GridManager gridManager)
+        public Endscreen()
         {
             InitializeComponent();
+            Player1Name.Content = GridManager.Instance.LiveGame.Player1Name;
+            Player2Name.Content = GridManager.Instance.LiveGame.Player2Name;
+            scorep1.Content = "Score: " + GridManager.Instance.LiveGame.ScoreP1;
+            scorep2.Content = "Score: " + GridManager.Instance.LiveGame.ScoreP2;
             var hsl = SaveGameManager.Instance.GetHighScoreList();
             hsl?.OrderByDescending(hsi => hsi.Score).ToList()
                 .ForEach(e => HighScoreList.Items.Add($"{e.PlayerName}: {e.Score}"));
         }
 
-        public Endscreen(MainMenuWindow mainMenuWindow)
-        {
-            this.mainMenuWindow = mainMenuWindow;
-        }
     }
 }
